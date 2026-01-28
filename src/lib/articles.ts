@@ -108,12 +108,18 @@ export function getArticlesByCategory(category: ArticleCategory): Article[] {
   return getAllArticles().filter(article => article.category === category);
 }
 
+export function getAvailableArticleCategories(): ArticleCategory[] {
+  const articles = getAllArticles();
+  const categories = new Set<ArticleCategory>();
+  articles.forEach(a => categories.add(a.category));
+  return Array.from(categories);
+}
+
 export function getArticleCounts(): Record<ArticleCategory, number> {
   const articles = getAllArticles();
-  return {
-    Notes: articles.filter(a => a.category === 'Notes').length,
-    Software: articles.filter(a => a.category === 'Software').length,
-    Physical: articles.filter(a => a.category === 'Physical').length,
-    Business: articles.filter(a => a.category === 'Business').length,
-  };
+  const counts = {} as Record<ArticleCategory, number>;
+  for (const category of getAvailableArticleCategories()) {
+    counts[category] = articles.filter(a => a.category === category).length;
+  }
+  return counts;
 }

@@ -1,17 +1,10 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { getAllArticles, getArticleCounts } from '@/lib/articles';
+import { getAllArticles, getArticleCounts, getAvailableArticleCategories } from '@/lib/articles';
 import type { ArticleCategory } from '@/types/article';
 
 type FilterType = 'All' | ArticleCategory;
-
-const categoryLabels: Record<ArticleCategory, string> = {
-  Notes: 'Notes',
-  Software: 'Software',
-  Physical: 'Physical',
-  Business: 'Business',
-};
 
 export default function WritingPage() {
   const [activeFilter, setActiveFilter] = useState<FilterType>('All');
@@ -34,15 +27,13 @@ export default function WritingPage() {
     });
   };
 
-  const categories = (['Notes', 'Software', 'Physical', 'Business'] as const).filter(
-    (cat) => articleCounts[cat] > 0
-  );
+  const categories = getAvailableArticleCategories();
 
   return (
     <>
       {/* Page Header */}
       <section className="pt-32 pb-8 bg-[#F7F5F2]">
-        <div className="px-[6vw] max-w-4xl mx-auto">
+        <div className="px-[6vw] max-w-5xl mx-auto">
           <h1 className="font-display headline-xl text-[#2D2A26] mb-4">
             Writing
           </h1>
@@ -54,7 +45,7 @@ export default function WritingPage() {
 
       {/* Filter Tabs */}
       <section className="bg-[#F7F5F2] pb-8">
-        <div className="px-[6vw] max-w-4xl mx-auto">
+        <div className="px-[6vw] max-w-5xl mx-auto">
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={() => setActiveFilter('All')}
@@ -76,7 +67,7 @@ export default function WritingPage() {
                     : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
                 }`}
               >
-                {categoryLabels[category]} ({articleCounts[category]})
+                {category} ({articleCounts[category]})
               </button>
             ))}
           </div>
@@ -85,7 +76,7 @@ export default function WritingPage() {
 
       {/* Articles List */}
       <section className="section-flowing bg-[#F7F5F2]">
-        <div className="px-[6vw] max-w-4xl mx-auto">
+        <div className="px-[6vw] max-w-5xl mx-auto">
           <div className="space-y-4">
             {filteredArticles.map((article) => (
               <Link

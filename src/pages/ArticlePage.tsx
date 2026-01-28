@@ -10,7 +10,7 @@ export default function ArticlePage() {
   if (!article) {
     return (
       <section className="pt-32 pb-16 bg-[#F7F5F2] min-h-screen">
-        <div className="px-[6vw] max-w-4xl mx-auto">
+        <div className="px-[6vw] max-w-5xl mx-auto">
           <h1 className="font-display headline-lg text-[#2D2A26] mb-4">
             Article not found
           </h1>
@@ -36,7 +36,7 @@ export default function ArticlePage() {
     <>
       {/* Header */}
       <section className="pt-32 pb-8 bg-[#F7F5F2]">
-        <div className="px-[6vw] max-w-3xl mx-auto">
+        <div className="px-[6vw] max-w-5xl mx-auto">
           <Link
             to="/writing"
             className="text-[#6B6560] flex items-center gap-2 hover:text-[#D95D39] transition-colors mb-8 text-sm"
@@ -59,15 +59,12 @@ export default function ArticlePage() {
             {article.title}
           </h1>
 
-          <p className="body-text text-lg text-[#6B6560]">
-            {article.excerpt}
-          </p>
         </div>
       </section>
 
       {/* Content */}
       <section className="section-flowing bg-[#F7F5F2]">
-        <div className="px-[6vw] max-w-3xl mx-auto">
+        <div className="px-[6vw] max-w-5xl mx-auto">
           <article className="prose prose-lg max-w-none">
             <ReactMarkdown
               components={{

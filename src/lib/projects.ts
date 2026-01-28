@@ -104,11 +104,18 @@ export function getProjectsByType(type: ProjectType): Project[] {
   return getAllProjects().filter(project => project.type === type);
 }
 
+export function getAvailableProjectTypes(): ProjectType[] {
+  const projects = getAllProjects();
+  const types = new Set<ProjectType>();
+  projects.forEach(p => types.add(p.type));
+  return Array.from(types);
+}
+
 export function getProjectCounts(): Record<ProjectType, number> {
   const projects = getAllProjects();
-  return {
-    Software: projects.filter(p => p.type === 'Software').length,
-    Physical: projects.filter(p => p.type === 'Physical').length,
-    Business: projects.filter(p => p.type === 'Business').length,
-  };
+  const counts = {} as Record<ProjectType, number>;
+  for (const type of getAvailableProjectTypes()) {
+    counts[type] = projects.filter(p => p.type === type).length;
+  }
+  return counts;
 }

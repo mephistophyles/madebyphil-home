@@ -1,16 +1,10 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import { getAllProjects, getProjectCounts } from '@/lib/projects';
+import { getAllProjects, getProjectCounts, getAvailableProjectTypes } from '@/lib/projects';
 import type { ProjectType } from '@/types/project';
 
 type FilterType = 'All' | ProjectType;
-
-const typeLabels: Record<ProjectType, string> = {
-  Software: 'Software',
-  Physical: 'Physical',
-  Business: 'Business',
-};
 
 export default function ProjectsPage() {
   const [activeFilter, setActiveFilter] = useState<FilterType>('All');
@@ -25,9 +19,7 @@ export default function ProjectsPage() {
     return allProjects.filter((project) => project.type === activeFilter);
   }, [allProjects, activeFilter]);
 
-  const types = (['Software', 'Physical', 'Business'] as const).filter(
-    (type) => projectCounts[type] > 0
-  );
+  const types = getAvailableProjectTypes();
 
   return (
     <>
@@ -68,7 +60,7 @@ export default function ProjectsPage() {
                     : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
                 }`}
               >
-                {typeLabels[type]} ({projectCounts[type]})
+                {type} ({projectCounts[type]})
               </button>
             ))}
           </div>
