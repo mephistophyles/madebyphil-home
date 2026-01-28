@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 35 20% 96%;
+    --foreground: 30 8% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 30 8% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 8% 16%;
+    --primary: 15 68% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 35 15% 92%;
+    --secondary-foreground: 30 8% 16%;
+    --muted: 35 15% 92%;
+    --muted-foreground: 30 5% 42%;
+    --accent: 15 68% 54%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 35 10% 85%;
+    --input: 35 10% 85%;
+    --ring: 15 68% 54%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-[#F7F5F2] text-[#2D2A26] antialiased;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.0;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-handwritten {
+    font-family: 'Caveat', cursive;
+  }
+  
+  .text-accent {
+    color: #D95D39;
+  }
+  
+  .bg-accent {
+    background-color: #D95D39;
+  }
+  
+  .card-shadow {
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.08);
+  }
+  
+  .card-shadow-hover {
+    box-shadow: 0 8px 30px rgba(45, 42, 38, 0.12);
+  }
+  
+  .section-pinned {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .section-flowing {
+    width: 100%;
+    position: relative;
+    padding: 6rem 0;
+  }
+  
+  .image-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(45, 42, 38, 0.08);
+  }
+  
+  .image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .annotation {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    color: #D95D39;
+  }
+  
+  .btn-primary {
+    @apply bg-[#D95D39] text-white px-6 py-3 rounded-xl font-medium transition-all duration-200;
+  }
+  
+  .btn-primary:hover {
+    @apply scale-105;
+    box-shadow: 0 4px 20px rgba(217, 93, 57, 0.3);
+  }
+  
+  .btn-secondary {
+    @apply text-[#2D2A26] px-6 py-3 rounded-xl font-medium border border-[#6B6560]/30 transition-all duration-200;
+  }
+  
+  .btn-secondary:hover {
+    @apply border-[#D95D39] text-[#D95D39];
+  }
+  
+  .nav-link {
+    @apply text-[#6B6560] hover:text-[#2D2A26] transition-colors duration-200 text-sm;
+  }
+  
+  .headline-xl {
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+  
+  .headline-lg {
+    font-size: clamp(28px, 3.5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  
+  .body-text {
+    @apply text-[#6B6560] text-base leading-relaxed;
+    line-height: 1.6;
+  }
+  
+  .category-card {
+    @apply bg-white rounded-2xl overflow-hidden card-shadow transition-all duration-300 cursor-pointer;
+  }
+  
+  .category-card:hover {
+    @apply card-shadow-hover scale-[1.02];
+  }
+  
+  .project-card {
+    @apply bg-white rounded-2xl overflow-hidden card-shadow transition-all duration-300;
+  }
+  
+  .project-card:hover {
+    @apply card-shadow-hover;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
