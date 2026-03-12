@@ -5,7 +5,7 @@ import { getRecentArticles } from '@/lib/articles';
 
 export default function HomePage() {
   const featuredProjects = getFeaturedProjects();
-  const recentArticles = getRecentArticles(2);
+  const recentArticles = getRecentArticles(3);
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString('en-US', {
@@ -52,7 +52,7 @@ export default function HomePage() {
                 transform: 'rotate(-3deg)'
               }}
             >
-              <img src="/hero_diy.jpg" alt="DIY project" />
+              <img src="/stached-logo2.png" alt="Logo for Stached project" />
             </div>
 
             <div
@@ -65,7 +65,7 @@ export default function HomePage() {
                 transform: 'rotate(4deg)'
               }}
             >
-              <img src="/hero_software.jpg" alt="Software project" />
+              <img src="/mokkapi-logo.png" alt="Software project" />
             </div>
 
             <div
@@ -78,7 +78,7 @@ export default function HomePage() {
                 transform: 'rotate(-2deg)'
               }}
             >
-              <img src="/hero_business.jpg" alt="Business project" />
+              <img src="/containqr-logo.png" alt="Business project" />
             </div>
 
             <div
@@ -91,7 +91,7 @@ export default function HomePage() {
                 transform: 'rotate(5deg)'
               }}
             >
-              <img src="/hero_workspace.jpg" alt="Workspace" />
+              <img src="/betterAMA-logo.png" alt="Workspace" />
             </div>
           </div>
         </div>

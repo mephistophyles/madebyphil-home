@@ -4,7 +4,7 @@ description: Self-hosted API mocking tool for developers
 type: Software
 date: 2025-11-15
 featured: true
-image: /mokkapi-logo.png
+image: /stached-logo2.png
 tags: [typescript, api, docker, developer-tools]
 status: completed
 link: https://github.com/example/mokkapi

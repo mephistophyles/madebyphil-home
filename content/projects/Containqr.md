@@ -1,10 +1,10 @@
 ---
-title: Mokkapi
+title: Containqr
 description: Self-hosted API mocking tool for developers
 type: Software
 date: 2025-11-15
 featured: true
-image: /mokkapi-logo.png
+image: /containqr-logo.png
 tags: [typescript, api, docker, developer-tools]
 status: completed
 link: https://github.com/example/mokkapi

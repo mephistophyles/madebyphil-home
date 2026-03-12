@@ -1,10 +1,10 @@
 ---
-title: Mokkapi
+title: Better AMA
 description: Self-hosted API mocking tool for developers
 type: Software
 date: 2025-11-15
 featured: true
-image: /mokkapi-logo.png
+image: /betterAMA-logo.png
 tags: [typescript, api, docker, developer-tools]
 status: completed
 link: https://github.com/example/mokkapi

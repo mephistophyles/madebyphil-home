@@ -32,7 +32,7 @@ So working out this example further with more numbers:
 
 Your CAC and ARR graphs would look like this:
 
-![channel-graph.png](Image of CAC and ARR trends as leads increase per channel)
+![Image of CAC and ARR trends as leads increase per channel](/channel-graph.png)
 
 Now in reality, your channel lead costs will go up and down based on different factors and how you track or segment your channels (often they overlap a bit) eg: each subsequent webinar may be cheaper than the first because you can amortize costs and effort. But at some point you see diminishing returns because eg the opportunity costs and availability of SMEs because a factor and it costs more effort to keep coming up with highly converting topics. You will also see that not every campaign per channel costs the same, you may need to do a given amount at first to earn the opportunity to do other activities (ie we sponsored an event yearly or paid a partnership fee, which allowed us to run a monthly marketing campaign with that partner - we might need to pay more for more campaigns but not linearly more). So variable 1 is exactly that, variable. 
 

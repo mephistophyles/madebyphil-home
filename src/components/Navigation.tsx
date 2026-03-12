@@ -28,13 +28,14 @@ export default function Navigation() {
       <nav
         className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#F7F5F2]/90 backdrop-blur-md py-4'
+            ? 'bg-[#F7F5F2] py-4'
             : 'bg-transparent py-6'
         }`}
       >
         <div className="px-[6vw] flex items-center justify-between">
-          <Link to="/" className="font-display text-[#2D2A26] text-lg">
-            Made By Phil
+          <Link to="/" className="flex items-center gap-2">
+            <img src="/logo.png" alt="Logo" className="h-8 w-8" />
+            <span className="font-display text-[#2D2A26] text-lg">Made By Phil</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

@@ -16,8 +16,8 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <div className="image-card w-64 h-80 flex-shrink-0">
               <img
-                src="/about_photo.jpg"
-                alt="Phil"
+                src="/phil_portrait.jpeg"
+                alt="Portrait of Phil outside a hiking trail in Iceland"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -28,7 +28,7 @@ export default function AboutPage() {
               </p>
 
               <p className="body-text mb-6">
-                I don't have a grand plan. I just like making stuff and sharing what I learn along the way. This site is a collection of those things—some finished, some abandoned, all part of the process.
+                I don't have a grand plan. I just like making stuff and sharing what I learn along the way. This site is a collection of those things.
               </p>
 
               <div className="flex gap-8 pt-4">
