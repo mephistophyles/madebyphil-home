@@ -114,7 +114,7 @@ export default function HeroSection() {
             ref={subheadRef}
             className="body-text text-lg max-w-md mb-8"
           >
-            Software, DIY projects, and sometimes companies. This is where I share what I'm working on.
+            Software, Woodworking, DIY projects, 3D prints and sometimes companies. This is where I share what I'm working on.
           </p>
           
           <button 
