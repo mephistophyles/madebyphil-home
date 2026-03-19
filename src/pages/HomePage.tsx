@@ -27,7 +27,7 @@ export default function HomePage() {
             </h1>
 
             <p className="body-text text-lg max-w-md mb-8">
-              Software, DIY projects, and sometimes companies. This is where I share what I'm working on.
+              Software, woodworking, DIY projects, 3D prints, and sometimes companies. This is where I share what I'm working on.
             </p>
 
             <Link to="/projects" className="btn-primary inline-flex items-center gap-2">

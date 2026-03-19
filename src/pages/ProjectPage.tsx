@@ -85,7 +85,7 @@ export default function ProjectPage() {
       </section>
 
       {/* Featured Image */}
-      <section className="bg-[#F7F5F2] pb-8">
+      <section className="bg-[#F7F5F2] pb-4">
         <div className="px-[6vw] max-w-4xl mx-auto">
           <div className="rounded-xl overflow-hidden card-shadow">
             <img
@@ -98,7 +98,7 @@ export default function ProjectPage() {
       </section>
 
       {/* Content */}
-      <section className="section-flowing bg-[#F7F5F2]">
+      <section className="section-flowing-compact bg-[#F7F5F2]">
         <div className="px-[6vw] max-w-4xl mx-auto">
           <article className="prose prose-lg max-w-none">
             <ReactMarkdown

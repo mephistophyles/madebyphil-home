@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navigation from './Navigation';
-import FooterSection from '../sections/FooterSection';
+import Footer from './Footer';
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -16,7 +16,7 @@ export default function Layout() {
       <main className="relative">
         <Outlet />
       </main>
-      <FooterSection />
+      <Footer />
     </div>
   );
 }

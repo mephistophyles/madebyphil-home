@@ -37,7 +37,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* Filter Tabs */}
-      <section className="bg-[#F7F5F2] pb-8">
+      <section className="bg-[#F7F5F2] pb-4">
         <div className="px-[6vw] max-w-5xl mx-auto">
           <div className="flex items-center gap-2 flex-wrap">
             <button
@@ -68,7 +68,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* Projects List */}
-      <section className="section-flowing bg-[#F7F5F2]">
+      <section className="section-flowing-compact bg-[#F7F5F2]">
         <div className="px-[6vw] max-w-5xl mx-auto">
           <div className="space-y-6">
             {filteredProjects.map((project) => (

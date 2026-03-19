@@ -6,7 +6,7 @@ const socialLinks = [
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/philipheijkoop/' },
 ];
 
-export default function FooterSection() {
+export default function Footer() {
   return (
     <footer className="bg-[#2D2A26] py-8">
       <div className="px-[6vw]">

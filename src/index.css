@@ -95,7 +95,15 @@
   .section-flowing {
     width: 100%;
     position: relative;
-    padding: 6rem 0;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  .section-flowing-compact {
+    width: 100%;
+    position: relative;
+    padding-top: 3rem;
+    padding-bottom: 6rem;
   }
   
   .image-card {

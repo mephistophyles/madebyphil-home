@@ -35,7 +35,7 @@ export default function ArticlePage() {
   return (
     <>
       {/* Header */}
-      <section className="pt-32 pb-8 bg-[#F7F5F2]">
+      <section className="pt-32 pb-4 bg-[#F7F5F2]">
         <div className="px-[6vw] max-w-5xl mx-auto">
           <Link
             to="/writing"
@@ -63,7 +63,7 @@ export default function ArticlePage() {
       </section>
 
       {/* Content */}
-      <section className="section-flowing bg-[#F7F5F2]">
+      <section className="section-flowing-compact bg-[#F7F5F2]">
         <div className="px-[6vw] max-w-5xl mx-auto">
           <article className="prose prose-lg max-w-none">
             <ReactMarkdown
