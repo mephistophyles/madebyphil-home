@@ -1,6 +1,7 @@
 services:
   web:
+    container_name: madebyphil-home
     build: .
     ports:
-      - "3000:80"
+      - "8080:80"
     restart: unless-stopped
