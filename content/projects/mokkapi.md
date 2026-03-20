@@ -2,12 +2,12 @@
 title: Mokkapi
 description: Self-hosted API mocking tool for developers
 type: Software
-date: 2025-11-15
+date: 2025-2-25
 featured: true
 image: /mokkapi-logo.png
-tags: [typescript, api, docker, developer-tools]
-status: completed
-link: https://github.com/example/mokkapi
+tags: [django, api, docker, developer-tools]
+status: pivoted
+link: https://github.com/mokkapi/mokkapi
 ---
 
 Mokkapi is a lightweight, self-hosted API mocking tool designed to help developers create and manage mock endpoints during development.
@@ -27,11 +27,10 @@ Mokkapi runs locally via Docker and provides a simple YAML-based configuration f
 
 ## Technical Stack
 
-- TypeScript for type safety
-- Express.js for the server
+- TypeScript for type safety and a React frontend
+- Django for the server
 - Docker for easy deployment
-- YAML configuration for simplicity
 
 ## What I Learned
 
-Building Mokkapi taught me a lot about developer experience design. The biggest lesson was that configuration should be dead simple—if someone has to read documentation to set up basic mocks, you've already failed.
+Getting the first one out the door is hard. Starting a business and putting yourself out there as an entrepreneur is scary. There is also a lot more that goes into building a product and then a business than just making working software. Talking to prospective customers taught me that if your product doesn't really excel at a use case you believe in, they won't even try it. I tried to do too much and build more than I talked to customers. 

@@ -1,37 +1,30 @@
 ---
 title: Better AMA
-description: Self-hosted API mocking tool for developers
+description: Just a nicer way to read AMAs
 type: Software
-date: 2025-11-15
+date: 2026-1-15
 featured: true
 image: /betterAMA-logo.png
-tags: [typescript, api, docker, developer-tools]
+tags: [typescript, api, docker, design]
 status: completed
-link: https://github.com/example/mokkapi
+link: https://betterama.madebyphil.com
 ---
 
-Mokkapi is a lightweight, self-hosted API mocking tool designed to help developers create and manage mock endpoints during development.
+AMAs are great sources of information, but they're not easy to read. I like Reddit but it's not built for filtering threads. So I built a quick tool for that!
 
 ## The Problem
 
-When building frontend applications, you often need to work with APIs that don't exist yet, or you need to test edge cases that are difficult to reproduce with real backends. Most existing solutions are either cloud-based (requiring internet) or overly complex for simple use cases.
+AMAs contain a lot of useful insights. But you want to read it a certain way (ideally you want to see just the questions the AMA person actually answered, or the ones that got the most upvotes). 
 
 ## The Solution
 
-Mokkapi runs locally via Docker and provides a simple YAML-based configuration for defining mock endpoints. It supports:
-
-- **Dynamic responses** based on request parameters
-- **Latency simulation** for testing loading states
-- **Error injection** for testing error handling
-- **Request logging** for debugging
+Just a simple interface to show AMAs and read them, filter their answers a few different ways. 
 
 ## Technical Stack
 
-- TypeScript for type safety
-- Express.js for the server
-- Docker for easy deployment
-- YAML configuration for simplicity
+- Stached as the backend
+- Lovable and then React for the frontend beauty
 
 ## What I Learned
 
-Building Mokkapi taught me a lot about developer experience design. The biggest lesson was that configuration should be dead simple—if someone has to read documentation to set up basic mocks, you've already failed.
+Sometimes the answer is as simple as taking data from one place and presenting it in a different setup. That's the whole value here.

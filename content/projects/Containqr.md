@@ -1,37 +1,32 @@
 ---
 title: Containqr
-description: Self-hosted API mocking tool for developers
+description: A simple tool to track where all your stored stuff is
 type: Software
-date: 2025-11-15
+date: 2026-11-15
 featured: true
 image: /containqr-logo.png
-tags: [typescript, api, docker, developer-tools]
+tags: [typescript, api, docker, b2c]
 status: completed
-link: https://github.com/example/mokkapi
+link: https://www.containqr.com
 ---
 
-Mokkapi is a lightweight, self-hosted API mocking tool designed to help developers create and manage mock endpoints during development.
+Containqr is a simple tool that lets you track all you storage containers and their contents in a single place. Add QR codes to each container to look up their contents (great when they're stacked or in awkward places) and search all the contents to figure out where that really specific thing is you need.
 
 ## The Problem
 
-When building frontend applications, you often need to work with APIs that don't exist yet, or you need to test edge cases that are difficult to reproduce with real backends. Most existing solutions are either cloud-based (requiring internet) or overly complex for simple use cases.
+We all have too much stuff. It's stored in different places, in boxes we can't see inside easily. Where are the christmas lights? Where are the kids summer clothes sized 3t and up?
 
 ## The Solution
 
-Mokkapi runs locally via Docker and provides a simple YAML-based configuration for defining mock endpoints. It supports:
-
-- **Dynamic responses** based on request parameters
-- **Latency simulation** for testing loading states
-- **Error injection** for testing error handling
-- **Request logging** for debugging
+Incrementally (or in one big push) add QR codes to each container and log their contents. Then you can search them and find out where they're stored when you need something. Simple.
 
 ## Technical Stack
 
-- TypeScript for type safety
-- Express.js for the server
+- TypeScript for type safety and React because it's easy to make things pretty
+- Django for the server, and Google OAuth because you shouldn't trust me with any passwords
 - Docker for easy deployment
-- YAML configuration for simplicity
+- Stripe for easy, trustless payments.
 
 ## What I Learned
 
-Building Mokkapi taught me a lot about developer experience design. The biggest lesson was that configuration should be dead simple—if someone has to read documentation to set up basic mocks, you've already failed.
+I've used this tool more often than I thought I would. Clones exist out there, but the best way to know this one will be around for a while (because you do need to pay for it) is that I use it too. Not every day, this is like insurance or data backups, you'll be glad you have it a few times a year and that alone will make it worth it.
