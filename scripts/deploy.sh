@@ -4,7 +4,8 @@ set -euo pipefail
 cd /home/ubuntu/madebyphil-home
 
 echo "Pulling latest code..."
-git pull origin main
+git fetch origin
+git reset --hard origin/main
 
 echo "Building and starting containers..."
 docker compose up -d --build
@@ -12,4 +13,7 @@ docker compose up -d --build
 echo "Current container status:"
 docker compose ps
 
-echo "Done."
+echo "Pruning dangling images..."
+docker image prune -f
+
+echo "Deploy Complete."
