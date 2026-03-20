@@ -11,27 +11,27 @@ jobs:
     steps:
       - name: Show target
         run: |
-          echo "Host: ${{ secrets.EC2_HOST }}"
-          echo "User: ${{ secrets.EC2_USER }}"
+          echo "Host: ${{ secrets.SSH_HOST }}"
+          echo "User: ${{ secrets.SSH_USER }}"
 
       - name: Check TCP 22 reachability
         run: |
-          nc -vz ${{ secrets.EC2_HOST }} 22
+          nc -vz ${{ secrets.SSH_HOST }} 22
 
       - name: Install SSH key
         run: |
           mkdir -p ~/.ssh
-          printf '%s\n' "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_deploy
+          printf '%s\n' "${{ secrets.SSH_KEY }}" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
 
       - name: Test raw SSH
         run: |
           ssh -vvv -o StrictHostKeyChecking=no -i ~/.ssh/id_deploy \
-            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
             'echo CONNECTED && whoami && hostname && pwd'
 
       - name: Test deploy script directly
         run: |
           ssh -vvv -o StrictHostKeyChecking=no -i ~/.ssh/id_deploy \
-            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
             'bash -x /home/ubuntu/madebyphil-home/scripts/deploy.sh'
