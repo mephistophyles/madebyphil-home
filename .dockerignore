@@ -1,0 +1,7 @@
+certbot/conf
+certbot/www
+nginx
+.git
+.github
+scripts
+README.md
