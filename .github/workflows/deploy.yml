@@ -16,5 +16,8 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ubuntu
           key: ${{ secrets.SSH_KEY }}
+          timeout: 5m
+          command_timeout: 20m
+          debug: true
           script: |
             /home/ubuntu/madebyphil-home/scripts/deploy.sh
