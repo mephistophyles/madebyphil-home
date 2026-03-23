@@ -96,6 +96,12 @@ export function getFeaturedProjects(): Project[] {
   return getAllProjects().filter(project => project.featured);
 }
 
+export function getRandomFeaturedProjects(count: number): Project[] {
+  const featured = getFeaturedProjects();
+  const shuffled = [...featured].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, Math.min(count, shuffled.length));
+}
+
 export function getProjectBySlug(slug: string): Project | undefined {
   return getAllProjects().find(project => project.slug === slug);
 }

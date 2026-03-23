@@ -1,10 +1,19 @@
 import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
-import { getFeaturedProjects } from '@/lib/projects';
+import { getFeaturedProjects, getRandomFeaturedProjects } from '@/lib/projects';
 import { getRecentArticles } from '@/lib/articles';
+
+// Polaroid card layout configs (position + rotation)
+const CARD_CONFIGS = [
+  { right: '8vw',  top: '15vh', width: '280px', height: '200px', transform: 'rotate(-3deg)' },
+  { right: '4vw',  top: '35vh', width: '260px', height: '180px', transform: 'rotate(4deg)'  },
+  { right: '12vw', top: '52vh', width: '240px', height: '160px', transform: 'rotate(-2deg)' },
+  { right: '6vw',  top: '68vh', width: '200px', height: '140px', transform: 'rotate(5deg)'  },
+];
 
 export default function HomePage() {
   const featuredProjects = getFeaturedProjects();
+  const heroProjects = getRandomFeaturedProjects(4);
   const recentArticles = getRecentArticles(3);
 
   const formatDate = (dateStr: string) => {
@@ -42,57 +51,15 @@ export default function HomePage() {
 
           {/* Right Images - Polaroid Collage */}
           <div className="w-1/2 h-screen relative">
-            <div
-              className="image-card absolute"
-              style={{
-                right: '8vw',
-                top: '15vh',
-                width: '280px',
-                height: '200px',
-                transform: 'rotate(-3deg)'
-              }}
-            >
-              <img src="/stached-logo2.png" alt="Logo for Stached project" />
-            </div>
-
-            <div
-              className="image-card absolute"
-              style={{
-                right: '4vw',
-                top: '35vh',
-                width: '260px',
-                height: '180px',
-                transform: 'rotate(4deg)'
-              }}
-            >
-              <img src="/mokkapi-logo.png" alt="Software project" />
-            </div>
-
-            <div
-              className="image-card absolute"
-              style={{
-                right: '12vw',
-                top: '52vh',
-                width: '240px',
-                height: '160px',
-                transform: 'rotate(-2deg)'
-              }}
-            >
-              <img src="/containqr-logo.png" alt="Business project" />
-            </div>
-
-            <div
-              className="image-card absolute"
-              style={{
-                right: '6vw',
-                top: '68vh',
-                width: '200px',
-                height: '140px',
-                transform: 'rotate(5deg)'
-              }}
-            >
-              <img src="/betterAMA-logo.png" alt="Workspace" />
-            </div>
+            {heroProjects.map((project, i) => (
+              <div
+                key={project.slug}
+                className="image-card absolute"
+                style={CARD_CONFIGS[i]}
+              >
+                <img src={project.image} alt={`Logo for ${project.title}`} />
+              </div>
+            ))}
           </div>
         </div>
       </section>
