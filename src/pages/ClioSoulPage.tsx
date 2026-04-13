@@ -1,27 +1,21 @@
-import { ArrowRight, Bot, GitBranch, Shield } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Bot, GitBranch, Shield } from 'lucide-react';
+import ClioMarkdown from '@/components/ClioMarkdown';
 import ClioSubnav from '@/components/ClioSubnav';
-import { clioSoulArtifacts } from '@/lib/clio';
+import { getAllClioSoulArtifacts } from '@/lib/clio';
 
 export default function ClioSoulPage() {
+  const soulArtifacts = getAllClioSoulArtifacts();
+
   return (
     <div className="clio-page min-h-screen">
       <section className="px-[6vw] pt-32 pb-10 bg-[#0B1120] border-b border-white/10">
         <div className="max-w-6xl mx-auto">
           <p className="clio-section-label">Clio / Soul</p>
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-            <div className="max-w-3xl">
-              <h1 className="font-display headline-lg text-white mb-4">Soul and agents</h1>
-              <p className="text-lg leading-8 text-[#C5CEDD]">
-                This page is for the inner machinery we are willing to make public: Clio’s
-                evolving soul, the role of sub-agents, and the explicit privacy line around both.
-              </p>
-            </div>
-            <Link to="/clio" className="clio-button-secondary w-fit">
-              Back to overview
-              <ArrowRight size={16} />
-            </Link>
-          </div>
+          <h1 className="font-display headline-lg text-white mb-4">Soul and agents</h1>
+          <p className="text-lg leading-8 text-[#C5CEDD] max-w-3xl">
+            This page is for the inner machinery we are willing to make public: Clio’s evolving
+            soul, the role of sub-agents, and the explicit privacy line around both.
+          </p>
         </div>
       </section>
 
@@ -32,14 +26,20 @@ export default function ClioSoulPage() {
           <div className="clio-panel">
             <p className="clio-section-label">Public surface area</p>
             <div className="space-y-4">
-              {clioSoulArtifacts.map((artifact, index) => {
+              {soulArtifacts.map((artifact, index) => {
                 const Icon = index === 0 ? GitBranch : index === 1 ? Bot : Shield;
+
                 return (
-                  <article key={artifact.title} className="clio-card flex items-start gap-4">
+                  <article key={artifact.slug} className="clio-card flex items-start gap-4">
                     <Icon size={18} className="text-[#6EE7B7] mt-1 flex-shrink-0" />
                     <div>
-                      <h2 className="font-display text-2xl text-white mb-2">{artifact.title}</h2>
-                      <p className="text-[#C5CEDD] leading-7">{artifact.description}</p>
+                      <div className="flex flex-wrap items-center gap-3 mb-2">
+                        <h2 className="font-display text-2xl text-white">{artifact.title}</h2>
+                        <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs uppercase tracking-[0.18em] text-[#8FB4FF]">
+                          {artifact.kind}
+                        </span>
+                      </div>
+                      <ClioMarkdown content={artifact.content} />
                     </div>
                   </article>
                 );

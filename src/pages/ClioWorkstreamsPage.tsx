@@ -1,7 +1,7 @@
-import { ArrowRight, CheckCircle2, PauseCircle, PlayCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { CheckCircle2, PauseCircle, PlayCircle } from 'lucide-react';
+import ClioMarkdown from '@/components/ClioMarkdown';
 import ClioSubnav from '@/components/ClioSubnav';
-import { clioWorkstreams } from '@/lib/clio';
+import { getAllClioWorkstreams } from '@/lib/clio';
 
 const statusIcon: Record<string, typeof PlayCircle> = {
   Active: PlayCircle,
@@ -9,24 +9,18 @@ const statusIcon: Record<string, typeof PlayCircle> = {
 };
 
 export default function ClioWorkstreamsPage() {
+  const workstreams = getAllClioWorkstreams();
+
   return (
     <div className="clio-page min-h-screen">
       <section className="px-[6vw] pt-32 pb-10 bg-[#0B1120] border-b border-white/10">
         <div className="max-w-6xl mx-auto">
           <p className="clio-section-label">Clio / Workstreams</p>
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-            <div className="max-w-3xl">
-              <h1 className="font-display headline-lg text-white mb-4">Workstreams</h1>
-              <p className="text-lg leading-8 text-[#C5CEDD]">
-                This is where longer arcs live. Every workstream should show its owner, current
-                state, what done means, and what happens if it needs to pause.
-              </p>
-            </div>
-            <Link to="/clio" className="clio-button-secondary w-fit">
-              Back to overview
-              <ArrowRight size={16} />
-            </Link>
-          </div>
+          <h1 className="font-display headline-lg text-white mb-4">Workstreams</h1>
+          <p className="text-lg leading-8 text-[#C5CEDD] max-w-3xl">
+            This is where longer arcs live. Every workstream should show its owner, current state,
+            what done means, and what happens if it needs to pause.
+          </p>
         </div>
       </section>
 
@@ -34,10 +28,11 @@ export default function ClioWorkstreamsPage() {
 
       <section className="px-[6vw] py-16 bg-[#111827] border-b border-white/10">
         <div className="max-w-6xl mx-auto grid gap-5">
-          {clioWorkstreams.map((workstream) => {
+          {workstreams.map((workstream) => {
             const StatusIcon = statusIcon[workstream.status] ?? CheckCircle2;
+
             return (
-              <article key={workstream.title} className="clio-panel">
+              <article key={workstream.slug} className="clio-panel">
                 <div className="flex flex-wrap items-start justify-between gap-5 mb-5">
                   <div>
                     <h2 className="font-display text-2xl text-white mb-2">{workstream.title}</h2>
@@ -49,7 +44,7 @@ export default function ClioWorkstreamsPage() {
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-4 mb-5">
                   <div className="clio-card">
                     <p className="text-sm uppercase tracking-[0.18em] text-[#8FB4FF] mb-2">Done means</p>
                     <p className="text-[#C5CEDD] leading-7">{workstream.done}</p>
@@ -59,6 +54,8 @@ export default function ClioWorkstreamsPage() {
                     <p className="text-[#C5CEDD] leading-7">{workstream.nextStep}</p>
                   </div>
                 </div>
+
+                <ClioMarkdown content={workstream.content} />
               </article>
             );
           })}

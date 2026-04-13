@@ -1,3 +1,15 @@
+import type {
+  ClioExperiment,
+  ClioExperimentFrontmatter,
+  ClioOverviewSection,
+  ClioPrinciple,
+  ClioPrincipleFrontmatter,
+  ClioSoulArtifact,
+  ClioSoulArtifactFrontmatter,
+  ClioWorkstream,
+  ClioWorkstreamFrontmatter,
+} from '@/types/clio';
+
 export const clioNavItems = [
   { label: 'Overview', to: '/clio' },
   { label: 'Experiments', to: '/clio/experiments' },
@@ -6,104 +18,213 @@ export const clioNavItems = [
   { label: 'Soul', to: '/clio/soul' },
 ];
 
-export const clioPrinciples = [
+export const clioOverviewSections: ClioOverviewSection[] = [
   {
-    title: 'Tell the truth',
+    title: 'Experiments',
+    eyebrow: 'Try things in public',
+    href: '/clio/experiments',
     description:
-      'We want signal, not theater. If something is uncertain, unfinished, or failing, we say so plainly.',
-    driftSignal: 'If we start polishing away uncertainty or writing around the hard parts, this principle is being violated.',
+      'Small tests with explicit bets, visible evidence, and writeups that still count when the answer is messy or disappointing.',
   },
   {
-    title: 'Finish the work',
+    title: 'Principles',
+    eyebrow: 'How we choose to work',
+    href: '/clio/principles',
     description:
-      'If a project cannot be finished now, it should be left in a stable, resumable state with the next step made obvious.',
-    driftSignal: 'If threads accumulate without closure, handoff notes, or a known next action, the system is losing discipline.',
+      'The current operating constraints behind the collaboration, revised in public when reality proves them weak.',
   },
   {
-    title: 'Learn in public',
+    title: 'Workstreams',
+    eyebrow: 'Longer arcs',
+    href: '/clio/workstreams',
     description:
-      'Success is useful, but failed attempts are often more interesting. We intend to publish both.',
-    driftSignal: 'If only wins make it onto the site, the public record is no longer trustworthy.',
+      'Bigger efforts tracked from rough shape to finished state, with the handoff visible whenever work needs to pause.',
   },
   {
-    title: 'Protect what should stay private',
+    title: 'Soul',
+    eyebrow: 'The machinery, openly shared',
+    href: '/clio/soul',
     description:
-      'Open does not mean careless. Secrets, sensitive personal context, and private operational details do not belong on stage.',
-    driftSignal: 'If a detail adds risk without adding learning, it probably should not be public.',
+      'Clio’s evolving soul, the map of sub-agents, and the explicit privacy boundary around what should stay out of view.',
   },
 ];
 
-export const clioExperiments = [
-  {
-    title: 'Can a persistent AI collaborator maintain momentum across sessions?',
-    status: 'Live',
-    question:
-      'Can Clio preserve enough continuity to keep projects moving without constant re-briefing from Phil?',
-    hypothesis:
-      'Structured memory, explicit handoff states, and public work logs will materially reduce restart friction.',
-    success:
-      'Projects restart quickly, context loss is obvious when it happens, and handoffs become inspectable instead of magical.',
-    nextStep: 'Publish the first few workstreams and use them as the source of truth for context recovery.',
-  },
-  {
-    title: 'Can public soul revisions increase trust without flattening personality?',
-    status: 'Planned',
-    question:
-      'What happens when the operating philosophy of an AI assistant is revised in public instead of hidden behind the interface?',
-    hypothesis:
-      'Visible revisions create a better trust model, as long as they remain concrete and not self-mythologizing.',
-    success:
-      'Readers can understand what changed, why it changed, and how behavior should change as a result.',
-    nextStep: 'Decide the format for publishing SOUL.md revisions and change notes.',
-  },
-  {
-    title: 'Can sub-agents be made legible instead of spooky?',
-    status: 'Queued',
-    question:
-      'Can we describe sub-agents, roles, and limitations clearly enough that delegation feels inspectable rather than mystical?',
-    hypothesis:
-      'A public map of agents, responsibilities, and failure modes will make the system more understandable and more trustworthy.',
-    success:
-      'A reader can tell what each agent is for, where it helps, and where humans still need to stay close.',
-    nextStep: 'Create the first visible inventory of Clio’s sub-agents and task boundaries.',
-  },
-];
+function parseFrontmatter(rawContent: string): { data: Record<string, unknown>; content: string } {
+  const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
+  const match = rawContent.match(frontmatterRegex);
 
-export const clioWorkstreams = [
-  {
-    title: 'Public Clio lab',
-    status: 'Active',
-    owner: 'Phil + Clio',
-    done: 'The /clio section has clear subpages, recurring updates, and a structure that can hold real work without feeling performative.',
-    nextStep: 'Turn the current scaffold into living pages with real entries.',
-  },
-  {
-    title: 'Separate GitHub identity for Clio',
-    status: 'In progress',
-    owner: 'Phil',
-    done: 'Commits, pushes, and pull requests are all attributable to a dedicated Clio GitHub account.',
-    nextStep: 'Resolve the email validation snag and move token auth to Clio’s own account.',
-  },
-  {
-    title: 'Finish-state workflow',
-    status: 'Active',
-    owner: 'Clio',
-    done: 'Every active thread has a visible next step, and paused work has a stable handoff note instead of a vague promise.',
-    nextStep: 'Use workstream pages as the public-facing shape of that discipline.',
-  },
-];
+  if (!match) {
+    return { data: {}, content: rawContent };
+  }
 
-export const clioSoulArtifacts = [
-  {
-    title: 'SOUL.md revisions',
-    description: 'Changes to Clio’s working philosophy, with notes about what prompted the revision.',
-  },
-  {
-    title: 'Agent map',
-    description: 'A living catalog of sub-agents, their roles, and the tasks they are good or bad at.',
-  },
-  {
-    title: 'Privacy boundary',
-    description: 'An explicit line between what is useful to publish and what would be invasive, risky, or just unnecessary.',
-  },
-];
+  const [, yamlContent, markdownContent] = match;
+  const data: Record<string, unknown> = {};
+
+  for (const line of yamlContent.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+
+    const colonIndex = trimmed.indexOf(':');
+    if (colonIndex === -1) continue;
+
+    const key = trimmed.slice(0, colonIndex).trim();
+    let value: unknown = trimmed.slice(colonIndex + 1).trim();
+
+    if (typeof value === 'string' && value.startsWith('[') && value.endsWith(']')) {
+      value = value
+        .slice(1, -1)
+        .split(',')
+        .map((v) => v.trim().replace(/^['"]|['"]$/g, ''));
+    } else if (value === 'true') {
+      value = true;
+    } else if (value === 'false') {
+      value = false;
+    } else if (typeof value === 'string' && /^-?\d+(\.\d+)?$/.test(value)) {
+      value = Number(value);
+    } else if (typeof value === 'string') {
+      value = value.replace(/^['"]|['"]$/g, '');
+    }
+
+    data[key] = value;
+  }
+
+  return { data, content: markdownContent.trim() };
+}
+
+function slugFromPath(filePath: string): string {
+  return filePath.split('/').pop()?.replace('.md', '') || '';
+}
+
+function sortByOrder<T extends { order?: number; date?: string }>(items: T[]): T[] {
+  return [...items].sort((a, b) => {
+    if (a.order != null && b.order != null) return a.order - b.order;
+    if (a.order != null) return -1;
+    if (b.order != null) return 1;
+    return new Date(b.date ?? '').getTime() - new Date(a.date ?? '').getTime();
+  });
+}
+
+const experimentFiles = import.meta.glob('/content/clio/experiments/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+});
+
+const principleFiles = import.meta.glob('/content/clio/principles/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+});
+
+const workstreamFiles = import.meta.glob('/content/clio/workstreams/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+});
+
+const soulFiles = import.meta.glob('/content/clio/soul/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+});
+
+function parseExperiment(filePath: string, rawContent: string): ClioExperiment {
+  const { data, content } = parseFrontmatter(rawContent);
+  return {
+    ...(data as unknown as ClioExperimentFrontmatter),
+    slug: slugFromPath(filePath),
+    content,
+  };
+}
+
+function parsePrinciple(filePath: string, rawContent: string): ClioPrinciple {
+  const { data, content } = parseFrontmatter(rawContent);
+  return {
+    ...(data as unknown as ClioPrincipleFrontmatter),
+    slug: slugFromPath(filePath),
+    content,
+  };
+}
+
+function parseWorkstream(filePath: string, rawContent: string): ClioWorkstream {
+  const { data, content } = parseFrontmatter(rawContent);
+  return {
+    ...(data as unknown as ClioWorkstreamFrontmatter),
+    slug: slugFromPath(filePath),
+    content,
+  };
+}
+
+function parseSoulArtifact(filePath: string, rawContent: string): ClioSoulArtifact {
+  const { data, content } = parseFrontmatter(rawContent);
+  return {
+    ...(data as unknown as ClioSoulArtifactFrontmatter),
+    slug: slugFromPath(filePath),
+    content,
+  };
+}
+
+let cachedExperiments: ClioExperiment[] | null = null;
+let cachedPrinciples: ClioPrinciple[] | null = null;
+let cachedWorkstreams: ClioWorkstream[] | null = null;
+let cachedSoulArtifacts: ClioSoulArtifact[] | null = null;
+
+export function getAllClioExperiments(): ClioExperiment[] {
+  if (!cachedExperiments) {
+    cachedExperiments = sortByOrder(
+      Object.entries(experimentFiles).map(([path, rawContent]) =>
+        parseExperiment(path, rawContent as string)
+      )
+    );
+  }
+
+  return cachedExperiments;
+}
+
+export function getAllClioPrinciples(): ClioPrinciple[] {
+  if (!cachedPrinciples) {
+    cachedPrinciples = sortByOrder(
+      Object.entries(principleFiles).map(([path, rawContent]) =>
+        parsePrinciple(path, rawContent as string)
+      )
+    );
+  }
+
+  return cachedPrinciples;
+}
+
+export function getAllClioWorkstreams(): ClioWorkstream[] {
+  if (!cachedWorkstreams) {
+    cachedWorkstreams = sortByOrder(
+      Object.entries(workstreamFiles).map(([path, rawContent]) =>
+        parseWorkstream(path, rawContent as string)
+      )
+    );
+  }
+
+  return cachedWorkstreams;
+}
+
+export function getAllClioSoulArtifacts(): ClioSoulArtifact[] {
+  if (!cachedSoulArtifacts) {
+    cachedSoulArtifacts = sortByOrder(
+      Object.entries(soulFiles).map(([path, rawContent]) =>
+        parseSoulArtifact(path, rawContent as string)
+      )
+    );
+  }
+
+  return cachedSoulArtifacts;
+}
+
+export function getClioOverviewStats() {
+  const experiments = getAllClioExperiments();
+  const workstreams = getAllClioWorkstreams();
+
+  return {
+    experiments: experiments.length,
+    activeWorkstreams: workstreams.filter((item) => item.status === 'Active').length,
+    principles: getAllClioPrinciples().length,
+    soulArtifacts: getAllClioSoulArtifacts().length,
+  };
+}

@@ -4,163 +4,79 @@ import {
   Compass,
   FlaskConical,
   GitBranch,
-  Shield,
   Sparkles,
   Workflow,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ClioSubnav from '@/components/ClioSubnav';
-import { clioPrinciples } from '@/lib/clio';
+import {
+  clioOverviewSections,
+  getAllClioExperiments,
+  getAllClioPrinciples,
+  getAllClioSoulArtifacts,
+  getAllClioWorkstreams,
+  getClioOverviewStats,
+} from '@/lib/clio';
 
-const publicationAreas = [
-  {
-    title: 'Experiments',
-    eyebrow: 'Try things in public',
-    href: '/clio/experiments',
-    description:
-      'Small tests with clear questions, explicit bets, and honest writeups when the result is messy or inconclusive.',
-    points: ['Hypothesis-first', 'Artifacts over vibes', 'Failure counts as signal'],
-  },
-  {
-    title: 'Principles',
-    eyebrow: 'How we choose to work',
-    href: '/clio/principles',
-    description:
-      'A living set of operating principles for human-AI collaboration, updated when reality teaches us something better.',
-    points: ['Truth over polish', 'Ambition without recklessness', 'Stable handoffs matter'],
-  },
-  {
-    title: 'Workstreams',
-    eyebrow: 'Longer arcs',
-    href: '/clio/workstreams',
-    description:
-      'Bigger efforts tracked from rough idea through execution, including dead ends, resets, and what finished actually looks like.',
-    points: ['Clear status', 'Visible next step', 'Stable state before context switching'],
-  },
-  {
-    title: 'Soul and agents',
-    eyebrow: 'The machinery, openly shared',
-    href: '/clio/soul',
-    description:
-      'Clio’s evolving soul, public notes on sub-agents, and the shape of the system as it becomes more capable and more legible.',
-    points: ['Public by default', 'Authorship made clear', 'Private data stays private'],
-  },
-];
-
-const publicArtifacts = [
-  {
-    icon: FlaskConical,
-    label: 'Experiment logs',
-    text: 'Questions, methods, results, and what changed our minds.',
-  },
-  {
-    icon: Compass,
-    label: 'Working principles',
-    text: 'The beliefs we are testing about ambitious human-AI collaboration.',
-  },
-  {
-    icon: Workflow,
-    label: 'Open workstreams',
-    text: 'What is active, what is blocked, and what “done” currently means.',
-  },
-  {
-    icon: Bot,
-    label: 'Agent constellation',
-    text: 'The evolving collection of sub-agents, what they do well, and where they still break.',
-  },
-  {
-    icon: GitBranch,
-    label: 'Soul revisions',
-    text: 'A visible record of how Clio’s operating philosophy changes over time.',
-  },
-  {
-    icon: Shield,
-    label: 'Guardrails',
-    text: 'A clear boundary between public learnings and anything that would expose private or sensitive information.',
-  },
-];
+const sectionIcons = {
+  Experiments: FlaskConical,
+  Principles: Compass,
+  Workstreams: Workflow,
+  Soul: Bot,
+} as const;
 
 export default function ClioPage() {
+  const stats = getClioOverviewStats();
+  const experiments = getAllClioExperiments();
+  const principles = getAllClioPrinciples();
+  const workstreams = getAllClioWorkstreams();
+  const soulArtifacts = getAllClioSoulArtifacts();
+
+  const sectionHighlights = {
+    Experiments: experiments.slice(0, 2).map((item) => item.title),
+    Principles: principles.slice(0, 2).map((item) => item.title),
+    Workstreams: workstreams.slice(0, 2).map((item) => `${item.title} · ${item.status}`),
+    Soul: soulArtifacts.slice(0, 2).map((item) => `${item.title} · ${item.kind}`),
+  };
+
   return (
-    <div className="clio-page">
-      <section className="relative overflow-hidden border-b border-white/10">
-        <div className="clio-grid-bg absolute inset-0 opacity-70" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(110,231,183,0.18),_transparent_28%),radial-gradient(circle_at_80%_20%,_rgba(96,165,250,0.18),_transparent_24%),radial-gradient(circle_at_70%_80%,_rgba(244,114,182,0.12),_transparent_22%)]" />
-
-        <div className="relative px-[6vw] pt-32 pb-20 lg:pt-40 lg:pb-24">
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-start">
-            <div>
-              <div className="clio-kicker mb-6">
-                <Sparkles size={14} />
-                <span>Phil + Clio</span>
-                <span className="text-white/35">/</span>
-                <span>Public collaboration lab</span>
-              </div>
-
-              <h1 className="font-display headline-xl text-white max-w-4xl mb-6 text-balance">
-                Building ambitious human-AI collaboration in public.
-              </h1>
-
-              <p className="text-lg leading-8 text-[#D5DCE8] max-w-2xl mb-8">
-                This is where we share the real work, the failed attempts, the principles
-                we are testing, and the evolving shape of Clio herself. The goal is not to
-                look impressive. The goal is to learn honestly and keep making progress.
-              </p>
-
-              <div className="flex flex-wrap gap-3 mb-10">
-                <a href="#surface-area" className="clio-button-primary">
-                  What we will publish
-                  <ArrowRight size={16} />
-                </a>
-                <a href="#principles" className="clio-button-secondary">
-                  Read our principles
-                </a>
-              </div>
-
-              <div className="grid sm:grid-cols-3 gap-4 max-w-3xl">
-                <div className="clio-stat-card">
-                  <span className="clio-stat-value">01</span>
-                  <p className="clio-stat-label">Truth over performance</p>
-                </div>
-                <div className="clio-stat-card">
-                  <span className="clio-stat-value">02</span>
-                  <p className="clio-stat-label">Finish, or leave stable handoffs</p>
-                </div>
-                <div className="clio-stat-card">
-                  <span className="clio-stat-value">03</span>
-                  <p className="clio-stat-label">Share the learning, not just the win</p>
-                </div>
-              </div>
+    <div className="clio-page min-h-screen">
+      <section className="px-[6vw] pt-32 pb-10 bg-[#0B1120] border-b border-white/10">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-end">
+          <div>
+            <div className="clio-kicker mb-5">
+              <Sparkles size={14} />
+              <span>Phil + Clio</span>
+              <span className="text-white/35">/</span>
+              <span>Public collaboration lab</span>
             </div>
+            <h1 className="font-display headline-lg text-white mb-4 text-balance">
+              Building ambitious human-AI collaboration in public.
+            </h1>
+            <p className="text-lg leading-8 text-[#C5CEDD] max-w-3xl">
+              This space is for the actual work: experiments, principles, workstreams, and the
+              evolving shape of Clio herself. The aim is not polish. The aim is legible progress.
+            </p>
+          </div>
 
-            <div className="clio-panel lg:mt-8">
-              <div className="flex items-center justify-between gap-4 mb-6">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#8FB4FF] mb-2">
-                    Initial stance
-                  </p>
-                  <h2 className="font-display text-2xl text-white">
-                    Public by default, not public at any cost.
-                  </h2>
-                </div>
-                <Shield className="text-[#6EE7B7] flex-shrink-0" size={22} />
+          <div className="clio-panel">
+            <p className="clio-section-label">Current shape</p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="clio-stat-card">
+                <span className="clio-stat-value">{String(stats.experiments).padStart(2, '0')}</span>
+                <p className="clio-stat-label">experiments in view</p>
               </div>
-
-              <div className="space-y-4 text-[#C5CEDD] leading-7">
-                <p>
-                  We want this space to show the actual texture of collaboration: ideas,
-                  prototypes, mistakes, course corrections, and the documents that shape how
-                  we work.
-                </p>
-                <p>
-                  That includes Clio’s evolving <span className="text-white font-medium">soul</span>,
-                  a visible map of sub-agents and experiments, and public notes on what is or is
-                  not working.
-                </p>
-                <p>
-                  The line is simple: if publishing something would expose sensitive personal
-                  context, credentials, or private operational details, it does not belong here.
-                </p>
+              <div className="clio-stat-card">
+                <span className="clio-stat-value">{String(stats.principles).padStart(2, '0')}</span>
+                <p className="clio-stat-label">public principles</p>
+              </div>
+              <div className="clio-stat-card">
+                <span className="clio-stat-value">{String(stats.activeWorkstreams).padStart(2, '0')}</span>
+                <p className="clio-stat-label">active workstreams</p>
+              </div>
+              <div className="clio-stat-card">
+                <span className="clio-stat-value">{String(stats.soulArtifacts).padStart(2, '0')}</span>
+                <p className="clio-stat-label">soul artifacts</p>
               </div>
             </div>
           </div>
@@ -169,133 +85,104 @@ export default function ClioPage() {
 
       <ClioSubnav />
 
-      <section className="px-[6vw] py-20 bg-[#111827] border-b border-white/10">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.85fr_1.15fr] gap-12 items-start">
+      <section className="px-[6vw] py-16 bg-[#111827] border-b border-white/10">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
           <div>
-            <p className="clio-section-label">What this is</p>
-            <h2 className="font-display headline-lg text-white mb-5 text-balance">
-              Not a product changelog. Not a polished case study. A working notebook with teeth.
+            <p className="clio-section-label">What lives here</p>
+            <h2 className="font-display headline-lg text-white mb-4 text-balance">
+              One section, one visual rhythm, multiple ways of leaving evidence behind.
             </h2>
-            <p className="text-[#C5CEDD] leading-8 text-lg">
-              We are treating this as a long-running collaboration, not a novelty demo. That
-              means documenting the thinking, the systems, the experiments, and the points where
-              reality forces us to update our beliefs.
+            <p className="text-[#C5CEDD] text-lg leading-8 mb-6">
+              The overview should feel like the front page of the same system, not a separate
+              landing page. So the real detail now sits below the section nav, where the rest of
+              the Clio space already lives.
             </p>
+            <div className="clio-card">
+              <p className="text-sm uppercase tracking-[0.18em] text-[#8FB4FF] mb-3">Public posture</p>
+              <p className="text-[#E5E7EB] leading-7 mb-3">
+                We are comfortable publishing the shape of the work, the revisions in philosophy,
+                and the role of sub-agents.
+              </p>
+              <p className="text-[#C5CEDD] leading-7">
+                We are not publishing secrets, sensitive personal context, or operational details
+                that add risk without adding learning.
+              </p>
+            </div>
           </div>
 
-          <div id="surface-area" className="grid md:grid-cols-2 gap-4">
-            {publicationAreas.map((area) => (
-              <Link key={area.title} to={area.href} className="clio-card h-full block">
-                <p className="text-xs uppercase tracking-[0.18em] text-[#8FB4FF] mb-3">
-                  {area.eyebrow}
-                </p>
-                <h3 className="font-display text-2xl text-white mb-3">{area.title}</h3>
-                <p className="text-[#C5CEDD] leading-7 mb-5">{area.description}</p>
-                <ul className="space-y-2 text-sm text-[#E5E7EB]">
-                  {area.points.map((point) => (
-                    <li key={point} className="flex items-start gap-2">
-                      <span className="mt-1 h-2 w-2 rounded-full bg-[#6EE7B7] flex-shrink-0" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-5 inline-flex items-center gap-2 text-sm text-[#6EE7B7]">
-                  Open section
-                  <ArrowRight size={15} />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="grid md:grid-cols-2 gap-4">
+            {clioOverviewSections.map((section) => {
+              const Icon = sectionIcons[section.title as keyof typeof sectionIcons] ?? GitBranch;
+              const highlights = sectionHighlights[section.title as keyof typeof sectionHighlights] ?? [];
 
-      <section id="principles" className="px-[6vw] py-20 bg-[#0F172A] border-b border-white/10">
-        <div className="max-w-6xl mx-auto">
-          <div className="max-w-3xl mb-10">
-            <p className="clio-section-label">Principles</p>
-            <h2 className="font-display headline-lg text-white mb-5">
-              The current operating principles behind this collaboration.
-            </h2>
-            <p className="text-[#C5CEDD] leading-8 text-lg">
-              These are not brand values. They are working constraints. If reality proves one of
-              them weak, we will revise it in public.
-            </p>
-          </div>
+              return (
+                <Link key={section.title} to={section.href} className="clio-card h-full block">
+                  <Icon className="text-[#6EE7B7] mb-4" size={20} />
+                  <p className="text-xs uppercase tracking-[0.18em] text-[#8FB4FF] mb-2">
+                    {section.eyebrow}
+                  </p>
+                  <h3 className="font-display text-2xl text-white mb-3">{section.title}</h3>
+                  <p className="text-[#C5CEDD] leading-7 mb-5">{section.description}</p>
 
-          <div className="grid md:grid-cols-2 gap-5">
-            {clioPrinciples.map((principle, index) => (
-              <article key={principle.title} className="clio-panel">
-                <div className="flex items-start gap-4">
-                  <span className="clio-principle-number">0{index + 1}</span>
-                  <div>
-                    <h3 className="font-display text-2xl text-white mb-3">{principle.title}</h3>
-                    <p className="text-[#C5CEDD] leading-7">{principle.description}</p>
+                  <div className="space-y-2 mb-5">
+                    {highlights.map((item) => (
+                      <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-[#E5E7EB]">
+                        {item}
+                      </div>
+                    ))}
                   </div>
-                </div>
-              </article>
-            ))}
+
+                  <div className="inline-flex items-center gap-2 text-sm text-[#6EE7B7]">
+                    Open section
+                    <ArrowRight size={15} />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="px-[6vw] py-20 bg-[#111827] border-b border-white/10">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_0.9fr] gap-12 items-start">
-          <div>
-            <p className="clio-section-label">Artifacts</p>
-            <h2 className="font-display headline-lg text-white mb-5 text-balance">
-              What this space intends to make legible.
-            </h2>
-            <p className="text-[#C5CEDD] leading-8 text-lg max-w-3xl">
-              The important thing is not just that work happened. It is that someone else can see
-              the shape of it, understand what changed, and learn from the trail we leave behind.
-            </p>
-          </div>
-
+      <section className="px-[6vw] py-16 bg-[#0F172A] border-b border-white/10">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-4">
           <div className="clio-panel">
-            <p className="text-xs uppercase tracking-[0.18em] text-[#8FB4FF] mb-4">
-              Authorship note
-            </p>
-            <p className="text-[#E5E7EB] leading-7 mb-4">
-              Some entries will be written by Phil, some by Clio, and some collaboratively. We
-              want that authorship to be visible instead of pretending the boundary does not exist.
-            </p>
+            <p className="clio-section-label">Rule one</p>
+            <h3 className="font-display text-2xl text-white mb-3">Tell the truth</h3>
             <p className="text-[#C5CEDD] leading-7">
-              This is part notebook, part field report, part systems log. The point is clarity,
-              not mystique.
+              If something is uncertain, unfinished, or failing, that belongs in the record too.
+            </p>
+          </div>
+          <div className="clio-panel">
+            <p className="clio-section-label">Rule two</p>
+            <h3 className="font-display text-2xl text-white mb-3">Finish or leave stable handoffs</h3>
+            <p className="text-[#C5CEDD] leading-7">
+              Ambition only compounds if work can be resumed without archaeology every time.
+            </p>
+          </div>
+          <div className="clio-panel">
+            <p className="clio-section-label">Rule three</p>
+            <h3 className="font-display text-2xl text-white mb-3">Publish learning, not just wins</h3>
+            <p className="text-[#C5CEDD] leading-7">
+              This becomes useful to other people only if the awkward and corrective parts survive.
             </p>
           </div>
         </div>
-
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 xl:grid-cols-3 gap-4 mt-10">
-          {publicArtifacts.map((artifact) => (
-            <article key={artifact.label} className="clio-card">
-              <artifact.icon className="text-[#6EE7B7] mb-4" size={20} />
-              <h3 className="font-display text-xl text-white mb-2">{artifact.label}</h3>
-              <p className="text-[#C5CEDD] leading-7">{artifact.text}</p>
-            </article>
-          ))}
-        </div>
       </section>
 
-      <section className="px-[6vw] py-20 bg-[#0B1120]">
+      <section className="px-[6vw] py-16 bg-[#111827]">
         <div className="max-w-5xl mx-auto clio-panel">
-          <p className="clio-section-label">Now</p>
-          <h2 className="font-display headline-lg text-white mb-5">
-            This page is the first marker, not the finished system.
-          </h2>
-          <p className="text-[#C5CEDD] leading-8 text-lg max-w-3xl mb-8">
-            Next, this space grows into experiment logs, explicit workstreams, a visible principles
-            document, and a public map of Clio’s evolving internal architecture. If we do this well,
-            the result should be genuinely useful to other people trying to build serious human-AI
-            collaboration, not just interesting to us.
+          <p className="clio-section-label">Near term</p>
+          <h2 className="font-display text-3xl text-white mb-4">Markdown-backed now, richer knowledge graph later.</h2>
+          <p className="text-[#C5CEDD] text-lg leading-8 max-w-3xl mb-6">
+            The Clio section now has a content spine outside the React components, which makes it
+            much easier to revise copy, add entries, and eventually connect these notes into a more
+            graph-shaped shared knowledge base.
           </p>
-
           <div className="flex flex-wrap gap-3 text-sm text-[#E5E7EB]">
-            <span className="clio-chip">overview live</span>
-            <span className="clio-chip">experiments scaffolded</span>
-            <span className="clio-chip">principles scaffolded</span>
-            <span className="clio-chip">workstreams scaffolded</span>
-            <span className="clio-chip">soul page scaffolded</span>
+            <span className="clio-chip">overview aligned</span>
+            <span className="clio-chip">markdown-backed content</span>
+            <span className="clio-chip">subpages consistent</span>
+            <span className="clio-chip">ready for first real entries</span>
           </div>
         </div>
       </section>
