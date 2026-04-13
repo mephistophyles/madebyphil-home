@@ -18,15 +18,18 @@ This is a personal portfolio/homepage built with React 19, TypeScript, Vite, and
 - **shadcn/ui**: Component library configured in `components.json`. Add components with `npx shadcn@latest add <component>`.
 
 ### Project Structure
-- `src/pages/` - Page components (HomePage, ProjectsPage, ProjectPage, WritingPage, ArticlePage, AboutPage)
+- `src/pages/` - Page components (HomePage, ProjectsPage, ProjectPage, GalleryPage, GalleryItemPage, WritingPage, ArticlePage, AboutPage)
 - `src/components/ui/` - shadcn/ui components
 - `src/components/` - App-specific components (Navigation, Layout, etc.)
 - `src/lib/utils.ts` - Contains `cn()` helper for merging Tailwind classes
 - `src/lib/projects.ts` - Project content utilities (getAllProjects, getFeaturedProjects, getProjectBySlug, etc.)
 - `src/lib/articles.ts` - Article content utilities (getAllArticles, getRecentArticles, getArticleBySlug, etc.)
-- `src/types/` - TypeScript type definitions (project.ts, article.ts)
+- `src/lib/gallery.ts` - Gallery content utilities (getAllGalleryItems, getFeaturedGalleryItems, getGalleryItemBySlug, etc.)
+- `src/types/` - TypeScript type definitions (project.ts, article.ts, gallery.ts)
+- `src/components/GalleryLightbox.tsx` - Lightbox modal for snapshot/showcase gallery items
 - `content/projects/` - Markdown files for project content
 - `content/writing/` - Markdown files for blog articles
+- `content/gallery/` - Markdown files for 3D print gallery items
 
 ### Styling Conventions
 - **Typography**: Space Grotesk for headings (`font-display`), Inter for body (`font-body`), Caveat for handwritten annotations (`font-handwritten`)
@@ -81,6 +84,34 @@ Full article content in markdown...
 
 The filename becomes the URL slug (e.g., `my-post.md` → `/writing/my-post`).
 
+### Adding a Gallery Item
+Create a markdown file in `content/gallery/` with this frontmatter:
+
+```yaml
+---
+title: Item Title
+description: Short description (optional)
+origin: original | remix | commission
+date: 2026-01-15
+featured: true | false
+images: [/gallery/image1.jpg, /gallery/image2.jpg]
+tags: [tag1, tag2]
+filament: PLA (optional)
+printer: Printer Name (optional)
+project_slug: linked-project-slug (optional, links to /projects/ page)
+attribution_creator: Creator Name (optional, for remixes)
+attribution_url: https://original-url.com (optional)
+attribution_license: CC BY 4.0 (optional)
+---
+
+Optional markdown content...
+```
+
+The tier is auto-detected from content length: no body = snapshot (lightbox only), short body = showcase (lightbox with details), long body = feature (gets its own `/gallery/:slug` page).
+
+The filename becomes the URL slug (e.g., `desk-organizer.md` → `/gallery/desk-organizer`).
+
 ### Content Utilities
 - `src/lib/projects.ts` - `getAllProjects()`, `getFeaturedProjects()`, `getProjectBySlug(slug)`, `getProjectsByType(type)`, `getProjectCounts()`
 - `src/lib/articles.ts` - `getAllArticles()`, `getRecentArticles(count)`, `getArticleBySlug(slug)`, `getArticlesByCategory(category)`, `getArticleCounts()`
+- `src/lib/gallery.ts` - `getAllGalleryItems()`, `getFeaturedGalleryItems()`, `getGalleryItemBySlug(slug)`, `getGalleryItemsByOrigin(origin)`, `getGalleryItemCounts()`

@@ -3,7 +3,9 @@ import { Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
+  { label: 'Clio', to: '/clio' },
   { label: 'Projects', to: '/projects' },
+  { label: 'Gallery', to: '/gallery' },
   { label: 'Writing', to: '/writing' },
   { label: 'About', to: '/about' },
 ];
@@ -32,7 +34,7 @@ export default function Navigation() {
             : 'bg-transparent py-6'
         }`}
       >
-        <div className="px-[6vw] flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-[6vw] flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <img src="/logo.png" alt="Logo" className="h-8 w-8" />
             <span className="font-display text-[#2D2A26] text-lg">Made By Phil</span>
