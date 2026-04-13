@@ -8,11 +8,15 @@ import {
   Sparkles,
   Workflow,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import ClioSubnav from '@/components/ClioSubnav';
+import { clioPrinciples } from '@/lib/clio';
 
 const publicationAreas = [
   {
     title: 'Experiments',
     eyebrow: 'Try things in public',
+    href: '/clio/experiments',
     description:
       'Small tests with clear questions, explicit bets, and honest writeups when the result is messy or inconclusive.',
     points: ['Hypothesis-first', 'Artifacts over vibes', 'Failure counts as signal'],
@@ -20,6 +24,7 @@ const publicationAreas = [
   {
     title: 'Principles',
     eyebrow: 'How we choose to work',
+    href: '/clio/principles',
     description:
       'A living set of operating principles for human-AI collaboration, updated when reality teaches us something better.',
     points: ['Truth over polish', 'Ambition without recklessness', 'Stable handoffs matter'],
@@ -27,6 +32,7 @@ const publicationAreas = [
   {
     title: 'Workstreams',
     eyebrow: 'Longer arcs',
+    href: '/clio/workstreams',
     description:
       'Bigger efforts tracked from rough idea through execution, including dead ends, resets, and what finished actually looks like.',
     points: ['Clear status', 'Visible next step', 'Stable state before context switching'],
@@ -34,32 +40,10 @@ const publicationAreas = [
   {
     title: 'Soul and agents',
     eyebrow: 'The machinery, openly shared',
+    href: '/clio/soul',
     description:
       'Clio’s evolving soul, public notes on sub-agents, and the shape of the system as it becomes more capable and more legible.',
     points: ['Public by default', 'Authorship made clear', 'Private data stays private'],
-  },
-];
-
-const principles = [
-  {
-    title: 'Tell the truth',
-    description:
-      'We want signal, not theater. If something is uncertain, unfinished, or failing, we say so plainly.',
-  },
-  {
-    title: 'Finish the work',
-    description:
-      'If a project cannot be finished now, it should be left in a stable, resumable state with the next step made obvious.',
-  },
-  {
-    title: 'Learn in public',
-    description:
-      'Success is useful, but failed attempts are often more interesting. We intend to publish both.',
-  },
-  {
-    title: 'Protect what should stay private',
-    description:
-      'Open does not mean careless. Secrets, sensitive personal context, and private operational details do not belong on stage.',
   },
 ];
 
@@ -183,6 +167,8 @@ export default function ClioPage() {
         </div>
       </section>
 
+      <ClioSubnav />
+
       <section className="px-[6vw] py-20 bg-[#111827] border-b border-white/10">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.85fr_1.15fr] gap-12 items-start">
           <div>
@@ -199,7 +185,7 @@ export default function ClioPage() {
 
           <div id="surface-area" className="grid md:grid-cols-2 gap-4">
             {publicationAreas.map((area) => (
-              <article key={area.title} className="clio-card h-full">
+              <Link key={area.title} to={area.href} className="clio-card h-full block">
                 <p className="text-xs uppercase tracking-[0.18em] text-[#8FB4FF] mb-3">
                   {area.eyebrow}
                 </p>
@@ -213,7 +199,11 @@ export default function ClioPage() {
                     </li>
                   ))}
                 </ul>
-              </article>
+                <div className="mt-5 inline-flex items-center gap-2 text-sm text-[#6EE7B7]">
+                  Open section
+                  <ArrowRight size={15} />
+                </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -233,7 +223,7 @@ export default function ClioPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-5">
-            {principles.map((principle, index) => (
+            {clioPrinciples.map((principle, index) => (
               <article key={principle.title} className="clio-panel">
                 <div className="flex items-start gap-4">
                   <span className="clio-principle-number">0{index + 1}</span>
@@ -302,10 +292,10 @@ export default function ClioPage() {
 
           <div className="flex flex-wrap gap-3 text-sm text-[#E5E7EB]">
             <span className="clio-chip">overview live</span>
-            <span className="clio-chip">experiments planned</span>
-            <span className="clio-chip">principles public</span>
-            <span className="clio-chip">workstreams next</span>
-            <span className="clio-chip">soul revisions coming</span>
+            <span className="clio-chip">experiments scaffolded</span>
+            <span className="clio-chip">principles scaffolded</span>
+            <span className="clio-chip">workstreams scaffolded</span>
+            <span className="clio-chip">soul page scaffolded</span>
           </div>
         </div>
       </section>
