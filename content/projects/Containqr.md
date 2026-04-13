@@ -2,7 +2,7 @@
 title: Containqr
 description: A simple tool to track where all your stored stuff is
 type: Software
-date: 2026-11-15
+date: 2025-11-15
 featured: true
 image: /containqr-logo.png
 tags: [typescript, api, docker, b2c]

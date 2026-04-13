@@ -5,6 +5,8 @@ import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectPage from './pages/ProjectPage';
+import GalleryPage from './pages/GalleryPage';
+import GalleryItemPage from './pages/GalleryItemPage';
 import AboutPage from './pages/AboutPage';
 import WritingPage from './pages/WritingPage';
 import ArticlePage from './pages/ArticlePage';
@@ -19,6 +21,8 @@ function App() {
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="projects/:slug" element={<ProjectPage />} />
           <Route path="clio" element={<ClioPage />} />
+          <Route path="gallery" element={<GalleryPage />} />
+          <Route path="gallery/:slug" element={<GalleryItemPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="writing" element={<WritingPage />} />
           <Route path="writing/:slug" element={<ArticlePage />} />
