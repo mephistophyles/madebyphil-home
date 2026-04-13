@@ -8,6 +8,7 @@ import ProjectPage from './pages/ProjectPage';
 import AboutPage from './pages/AboutPage';
 import WritingPage from './pages/WritingPage';
 import ArticlePage from './pages/ArticlePage';
+import ClioPage from './pages/ClioPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="projects/:slug" element={<ProjectPage />} />
+          <Route path="clio" element={<ClioPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="writing" element={<WritingPage />} />
           <Route path="writing/:slug" element={<ArticlePage />} />
