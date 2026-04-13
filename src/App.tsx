@@ -10,6 +10,7 @@ import GalleryItemPage from './pages/GalleryItemPage';
 import AboutPage from './pages/AboutPage';
 import WritingPage from './pages/WritingPage';
 import ArticlePage from './pages/ArticlePage';
+import ClioPage from './pages/ClioPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="projects/:slug" element={<ProjectPage />} />
+          <Route path="clio" element={<ClioPage />} />
           <Route path="gallery" element={<GalleryPage />} />
           <Route path="gallery/:slug" element={<GalleryItemPage />} />
           <Route path="about" element={<AboutPage />} />
