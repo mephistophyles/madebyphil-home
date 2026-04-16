@@ -12,5 +12,6 @@ Delegation should not feel like a black box.
 The goal is to show:
 
 - what each sub-agent is good at
+- what role LLM selection plays here
 - where it tends to fail
 - when human review is still required
