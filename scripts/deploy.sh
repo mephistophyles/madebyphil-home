@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-REPO_DIR="/home/ubuntu/madebyphil-landing"
+REPO_DIR="/home/ubuntu/madebyphil-home"
 
 echo "Deploying from ${REPO_DIR}"
 cd "${REPO_DIR}"

@@ -33,4 +33,4 @@ jobs:
             -o ServerAliveCountMax=3 \
             -i ~/.ssh/id_deploy \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            'bash -x /home/ubuntu/madebyphil-landing/scripts/deploy.sh'
+            'bash -x /home/ubuntu/madebyphil-home/scripts/deploy.sh'
