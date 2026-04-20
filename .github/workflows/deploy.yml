@@ -17,12 +17,20 @@ jobs:
           printf '%s\n' "${{ secrets.SSH_KEY }}" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
 
+      - name: Check TCP 22 reachability
+        run: |
+          nc -vz "${{ secrets.SSH_HOST }}" 22
+
       - name: Add server to known_hosts
         run: |
-          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -T 10 -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Run deploy script
         run: |
-          ssh -i ~/.ssh/id_deploy \
+          ssh \
+            -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=3 \
+            -i ~/.ssh/id_deploy \
             ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            'bash -x /home/ubuntu/madebyphil-home/scripts/deploy.sh'
+            'bash -x /home/ubuntu/madebyphil-landing/scripts/deploy.sh'
