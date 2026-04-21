@@ -22,7 +22,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '25'
+          node-version: '20'
           cache: npm
 
       - name: Install dependencies
@@ -69,7 +69,8 @@ jobs:
             -o ConnectTimeout=10 \
             -o ServerAliveInterval=15 \
             -o ServerAliveCountMax=3 \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" <<EOF
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            "GITHUB_SHA='${GITHUB_SHA}' bash -s" <<'EOF'
             set -Eeuo pipefail
 
             APP_DIR="/var/www/madebyphil-home"
@@ -77,7 +78,7 @@ jobs:
             CURRENT_LINK="/var/www/madebyphil-home/current"
             ARCHIVE_PATH="/tmp/site.tar.gz"
             RELEASE_ID="${GITHUB_SHA}"
-            NEW_RELEASE_DIR="/var/www/madebyphil-home/releases/${GITHUB_SHA}"
+            NEW_RELEASE_DIR="${RELEASES_DIR}/${RELEASE_ID}"
 
             mkdir -p "${RELEASES_DIR}"
             rm -rf "${NEW_RELEASE_DIR}"
