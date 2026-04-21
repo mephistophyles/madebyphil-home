@@ -1,23 +1,60 @@
-name: Deploy to EC2
+name: Build and Deploy Static Site
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+concurrency:
+  group: madebyphil-home-deploy
+  cancel-in-progress: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
+    env:
+      NODE_VERSION: '25'
+      ARCHIVE_NAME: site.tar.gz
+      REMOTE_BASE_DIR: /var/www/madebyphil-home
+      REMOTE_RELEASES_DIR: /var/www/madebyphil-home/releases
+      REMOTE_CURRENT_LINK: /var/www/madebyphil-home/current
+
     steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          test -d dist
+          test -f dist/index.html
+          ls -la dist
+
+      - name: Package build
+        run: |
+          tar -C dist -czf "${{ env.ARCHIVE_NAME }}" .
+
       - name: Write SSH key
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "${{ secrets.SSH_KEY }}" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
 
-      - name: Check TCP 22 reachability
+      - name: Check SSH reachability
         run: |
           nc -vz "${{ secrets.SSH_HOST }}" 22
 
@@ -25,12 +62,45 @@ jobs:
         run: |
           ssh-keyscan -T 10 -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: Run deploy script
+      - name: Upload build artifact
         run: |
-          ssh \
+          scp -i ~/.ssh/id_deploy \
+            "${{ env.ARCHIVE_NAME }}" \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/tmp/${{ env.ARCHIVE_NAME }}"
+
+      - name: Activate release
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          ssh -i ~/.ssh/id_deploy \
             -o ConnectTimeout=10 \
             -o ServerAliveInterval=15 \
             -o ServerAliveCountMax=3 \
-            -i ~/.ssh/id_deploy \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            'bash -x /home/ubuntu/madebyphil-home/scripts/deploy.sh'
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" <<EOF
+            set -Eeuo pipefail
+
+            APP_DIR="${REMOTE_BASE_DIR}"
+            RELEASES_DIR="${REMOTE_RELEASES_DIR}"
+            CURRENT_LINK="${REMOTE_CURRENT_LINK}"
+            RELEASE_ID="${GITHUB_SHA}"
+            NEW_RELEASE_DIR="${REMOTE_RELEASES_DIR}/${GITHUB_SHA}"
+
+            mkdir -p "${RELEASES_DIR}"
+            rm -rf "${NEW_RELEASE_DIR}"
+            mkdir -p "${NEW_RELEASE_DIR}"
+
+            tar -xzf /tmp/${ARCHIVE_NAME} -C "${NEW_RELEASE_DIR}"
+            ln -sfn "${NEW_RELEASE_DIR}" "${CURRENT_LINK}"
+
+            find "${APP_DIR}" -type d -exec chmod 755 {} \;
+            find "${APP_DIR}" -type f -exec chmod 644 {} \;
+
+            sudo nginx -t
+            sudo systemctl reload nginx
+
+            rm -f /tmp/${ARCHIVE_NAME}
+
+            ls -1dt "${RELEASES_DIR}"/* 2>/dev/null | tail -n +6 | xargs -r rm -rf
+
+            curl -I http://localhost
+          EOF
