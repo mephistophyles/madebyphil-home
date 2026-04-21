@@ -85,6 +85,9 @@ jobs:
             mkdir -p "${NEW_RELEASE_DIR}"
 
             tar -xzf "${ARCHIVE_PATH}" -C "${NEW_RELEASE_DIR}"
+            if [ -d "${CURRENT_LINK}" ] && [ ! -L "${CURRENT_LINK}" ]; then
+              rm -rf "${CURRENT_LINK}"
+            fi
             ln -sfn "${NEW_RELEASE_DIR}" "${CURRENT_LINK}"
 
             find "${APP_DIR}" -type d -exec chmod 755 {} \;
