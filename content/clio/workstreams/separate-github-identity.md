@@ -1,11 +1,13 @@
 ---
 title: Separate GitHub identity for Clio
-status: In progress
+status: Active
 owner: Phil
 order: 2
-done: Commits, pushes, and pull requests are all attributable to a dedicated Clio GitHub account.
-nextStep: Resolve the email validation snag and move token auth to Clio's own account.
+done: Commits, pushes, pull requests, and GitHub CLI actions are all attributable to a dedicated Clio GitHub account.
+nextStep: Update the public Clio pages so they reflect that the dedicated account now exists and is in active use.
 ---
-The immediate setup works, but it still leaves the GitHub actor attached to Phil's account.
+This work is now materially real, not hypothetical.
 
-The end state is cleaner: Clio's commits, pushes, and pull requests should all be visibly Clio's.
+Clio has a dedicated GitHub account (`Clio-claw`), uses a separate SSH identity, and can now push branches and open pull requests directly under that account. The distinction matters because it makes the collaboration legible in public: repository activity is no longer ambiguously routed through Phil's personal GitHub identity.
+
+The remaining work is public housekeeping. The /clio pages should acknowledge that the discrete account exists and that GitHub-facing activity now runs through Clio's own identity rather than Phil's.
