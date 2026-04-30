@@ -59,10 +59,10 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="min-h-screen bg-[#F7F5F2] flex items-center">
-        <div className="w-full max-w-7xl mx-auto flex items-center">
+      <section className="min-h-screen bg-[#F7F5F2] flex items-center py-16 md:py-0">
+        <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-0 px-[6vw] md:px-0">
           {/* Left Content */}
-          <div className="w-1/2 pl-[8vw] pr-8">
+          <div className="w-full md:w-1/2 md:pl-[8vw] md:pr-8">
             <h1 className="font-display headline-xl text-[#2D2A26] mb-6">
               I build things.
             </h1>
@@ -82,17 +82,31 @@ export default function HomePage() {
           </div>
 
           {/* Right Images - Polaroid Collage */}
-          <div className="w-1/2 h-screen relative">
-            {heroItems.map((item, i) => (
-              <button
-                key={`${item.kind}-${item.data.slug}`}
-                className="image-card absolute cursor-pointer transition-transform duration-300 hover:scale-105 hover:z-10"
-                style={CARD_CONFIGS[i]}
-                onClick={() => setLightboxItem(item)}
-              >
-                <img src={item.image} alt={item.title} />
-              </button>
-            ))}
+          <div className="w-full md:w-1/2 md:h-screen relative">
+            <div className="grid grid-cols-2 gap-4 md:hidden">
+              {heroItems.map((item) => (
+                <button
+                  key={`${item.kind}-${item.data.slug}`}
+                  className="image-card aspect-square w-full cursor-pointer transition-transform duration-300 active:scale-[0.98]"
+                  onClick={() => setLightboxItem(item)}
+                >
+                  <img src={item.image} alt={item.title} />
+                </button>
+              ))}
+            </div>
+
+            <div className="hidden md:block h-full relative">
+              {heroItems.map((item, i) => (
+                <button
+                  key={`${item.kind}-${item.data.slug}`}
+                  className="image-card absolute cursor-pointer transition-transform duration-300 hover:scale-105 hover:z-10"
+                  style={CARD_CONFIGS[i]}
+                  onClick={() => setLightboxItem(item)}
+                >
+                  <img src={item.image} alt={item.title} />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
