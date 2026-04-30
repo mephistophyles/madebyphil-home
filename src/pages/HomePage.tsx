@@ -83,7 +83,7 @@ export default function HomePage() {
 
           {/* Right Images - Polaroid Collage */}
           <div className="w-full md:w-1/2 relative">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:hidden">
+            <div className="grid grid-cols-2 gap-4 md:hidden">
               {heroItems.map((item) => (
                 <button
                   key={`${item.kind}-${item.data.slug}`}
