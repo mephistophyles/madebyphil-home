@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowDown, ArrowUpRight, ChevronDown, ExternalLink } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { getAllFeedItems, getRandomFeaturedFeedItems, getAllFeedTags, getAvailableFeedCategories } from '@/lib/feed';
 import type { FeedItem, FeedCategory } from '@/lib/feed';
 import FeaturedLightbox from '@/components/FeaturedLightbox';
