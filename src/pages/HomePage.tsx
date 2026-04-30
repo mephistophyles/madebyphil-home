@@ -59,8 +59,8 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="min-h-screen bg-[#F7F5F2] flex items-center py-16 md:py-0">
-        <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-0 px-[6vw] md:px-0">
+      <section className="bg-[#F7F5F2] pt-32 pb-16 md:min-h-screen md:flex md:items-center md:py-0">
+        <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center gap-10 md:gap-0 px-[6vw] md:px-0">
           {/* Left Content */}
           <div className="w-full md:w-1/2 md:pl-[8vw] md:pr-8">
             <h1 className="font-display headline-xl text-[#2D2A26] mb-6">
@@ -82,20 +82,22 @@ export default function HomePage() {
           </div>
 
           {/* Right Images - Polaroid Collage */}
-          <div className="w-full md:w-1/2 md:h-screen relative">
-            <div className="grid grid-cols-2 gap-4 md:hidden">
+          <div className="w-full md:w-1/2 relative">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:hidden">
               {heroItems.map((item) => (
                 <button
                   key={`${item.kind}-${item.data.slug}`}
-                  className="image-card aspect-square w-full cursor-pointer transition-transform duration-300 active:scale-[0.98]"
+                  className="image-card block w-full overflow-hidden cursor-pointer transition-transform duration-300 active:scale-[0.98]"
                   onClick={() => setLightboxItem(item)}
                 >
-                  <img src={item.image} alt={item.title} />
+                  <div className="aspect-[4/3] w-full">
+                    <img src={item.image} alt={item.title} />
+                  </div>
                 </button>
               ))}
             </div>
 
-            <div className="hidden md:block h-full relative">
+            <div className="hidden md:block h-screen relative">
               {heroItems.map((item, i) => (
                 <button
                   key={`${item.kind}-${item.data.slug}`}
