@@ -9,7 +9,7 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="bg-[#2D2A26] py-8">
-      <div className="px-[6vw]">
+      <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw]">
         <div className="max-w-4xl mx-auto text-center">
           <p className="font-display text-xl text-[#F7F5F2] mb-4">
             Thanks for stopping by.

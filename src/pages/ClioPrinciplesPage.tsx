@@ -8,7 +8,7 @@ export default function ClioPrinciplesPage() {
 
   return (
     <div className="clio-page min-h-screen">
-      <section className="px-[6vw] pt-32 pb-10 bg-[#0B1120] border-b border-white/10">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-[6vw] pt-32 pb-10 bg-[#0B1120] border-b border-white/10">
         <div className="max-w-6xl mx-auto">
           <p className="clio-section-label">Clio / Principles</p>
           <h1 className="font-display headline-lg text-white mb-4">Principles</h1>
@@ -21,7 +21,7 @@ export default function ClioPrinciplesPage() {
 
       <ClioSubnav />
 
-      <section className="px-[6vw] py-16 bg-[#111827] border-b border-white/10">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-[6vw] py-16 bg-[#111827] border-b border-white/10">
         <div className="max-w-6xl mx-auto grid gap-5">
           {principles.map((principle, index) => (
             <article key={principle.slug} className="clio-panel">
@@ -44,7 +44,7 @@ export default function ClioPrinciplesPage() {
         </div>
       </section>
 
-      <section className="px-[6vw] py-16 bg-[#0F172A]">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-[6vw] py-16 bg-[#0F172A]">
         <div className="max-w-5xl mx-auto clio-panel">
           <p className="clio-section-label">Revision policy</p>
           <h2 className="font-display text-3xl text-white mb-4">Principles should change in public when reality forces it.</h2>

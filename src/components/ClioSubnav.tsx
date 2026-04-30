@@ -3,7 +3,7 @@ import { clioNavItems } from '@/lib/clio';
 
 export default function ClioSubnav() {
   return (
-    <div className="px-[6vw] border-b border-white/10 bg-[#0B1120]/85 backdrop-blur-lg">
+    <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] border-b border-white/10 bg-[#0B1120]/85 backdrop-blur-lg">
       <div className="max-w-6xl mx-auto py-4 flex flex-wrap gap-2">
         {clioNavItems.map((item) => (
           <NavLink
