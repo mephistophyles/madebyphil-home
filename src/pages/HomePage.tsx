@@ -51,11 +51,11 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-[#F7F5F2]">
-        <div className="flex flex-col md:flex-row items-stretch w-full max-w-7xl mx-auto">
+      <section className="min-h-screen bg-[#F7F5F2] flex items-center py-16 md:py-0">
+        <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-0 px-[6vw] md:px-0">
           {/* Left Content */}
-          <div className="flex flex-col justify-center w-full md:w-1/2 px-6 lg:px-[8vw] py-16 lg:py-0 pb-8">
-            <h1 className="font-display headline-xl text-[#2D2A26] mb-6 max-w-lg text-balance">
+          <div className="w-full md:w-1/2 md:pl-[8vw] md:pr-8">
+            <h1 className="font-display headline-xl text-[#2D2A26] mb-6">
               I build things.
             </h1>
 
