@@ -7,14 +7,6 @@ import FeaturedLightbox from '@/components/FeaturedLightbox';
 
 const INITIAL_COUNT = 10;
 
-// Polaroid card layout configs (position + rotation)
-const CARD_CONFIGS = [
-  { right: '8vw',  top: '15vh', width: '280px', height: '200px', transform: 'rotate(-3deg)' },
-  { right: '4vw',  top: '35vh', width: '260px', height: '180px', transform: 'rotate(4deg)'  },
-  { right: '12vw', top: '52vh', width: '240px', height: '160px', transform: 'rotate(-2deg)' },
-  { right: '6vw',  top: '68vh', width: '200px', height: '140px', transform: 'rotate(5deg)'  },
-];
-
 export default function HomePage() {
   const [expanded, setExpanded] = useState(false);
   const [activeCategory, setActiveCategory] = useState<'All' | FeedCategory>('All');
@@ -76,7 +68,7 @@ export default function HomePage() {
               <ArrowDown size={18} />
             </a>
 
-            <span className="annotation block mt-8 ml-4">
+            <span className="annotation mt-8 ml-1">
               (hi!)
             </span>
           </div>
@@ -100,34 +92,42 @@ export default function HomePage() {
             <div className="hidden md:block h-screen relative">
               {heroItems.map((item, i) => (
                 <button
-                  key={`${item.kind}-${item.data.slug}`}
-                  className="image-card absolute cursor-pointer transition-transform duration-300 hover:scale-105 hover:z-10"
-                  style={CARD_CONFIGS[i]}
+                  key={`mobile-${item.kind}-${item.data.slug}`}
+                  className="image-card absolute cursor-pointer transition-transform duration-300 hover:scale-105 touch-manipulation"
+                  style={{
+                    ...mobileConfig,
+                    transform: `rotate(${mobileConfig.rotation}deg)`,
+                  }}
                   onClick={() => setLightboxItem(item)}
                 >
                   <img src={item.image} alt={item.title} />
                 </button>
-              ))}
-            </div>
+              );
+            })}
+          </div>
+
+          {/* Subtle hint that it's scrollable */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 text-[#6B6560]/40 text-xs font-handwritten pointer-events-none">
+            swipe →
           </div>
         </div>
       </section>
 
       {/* Unified Feed */}
       <section id="feed" className="section-flowing bg-[#F7F5F2]">
-        <div className="px-[6vw] max-w-5xl mx-auto">
+        <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-5xl mx-auto">
           <h2 className="font-display headline-lg text-[#2D2A26] mb-8">
             Latest
           </h2>
 
           {/* Category filters */}
-          <div className="flex items-center gap-2 flex-wrap mb-4">
+          <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={() => { setActiveCategory('All'); setActiveTag(null); }}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 activeCategory === 'All' && !activeTag
-                  ? 'bg-[#D95D39] text-white'
-                  : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
+                   ? 'bg-[#D95D39] text-white'
+                   : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
               }`}
             >
               All ({allFeedItems.length})
@@ -138,9 +138,9 @@ export default function HomePage() {
                 onClick={() => { setActiveCategory(cat); setActiveTag(null); }}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   activeCategory === cat
-                    ? 'bg-[#D95D39] text-white'
-                    : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
-                }`}
+                     ? 'bg-[#D95D39] text-white'
+                     : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
+                 }`}
               >
                 {cat} ({allFeedItems.filter(i => i.category === cat).length})
               </button>
@@ -148,16 +148,16 @@ export default function HomePage() {
           </div>
 
           {/* Tag filters */}
-          <div className="flex items-center gap-1.5 flex-wrap mb-8 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex items-center gap-1.5 flex-wrap mt-4 mb-8 overflow-x-auto pb-2 scrollbar-hide -mx-2 px-2">
             {allTags.map((tag) => (
               <button
                 key={tag}
                 onClick={() => setActiveTag(activeTag === tag ? null : tag)}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
                   activeTag === tag
-                    ? 'bg-[#2D2A26] text-white'
-                    : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
-                }`}
+                     ? 'bg-[#2D2A26] text-white'
+                     : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
+                 }`}
               >
                 {tag}
               </button>
@@ -235,7 +235,7 @@ function FeedCard({
     >
       {/* Thumbnail */}
       {item.image && (
-        <div className="w-36 h-28 flex-shrink-0 overflow-hidden hidden sm:block">
+        <div className="w-24 sm:w-32 md:w-36 h-20 sm:h-24 md:h-28 flex-shrink-0 overflow-hidden hidden sm:block">
           <img
             src={item.image}
             alt={item.title}
@@ -246,26 +246,42 @@ function FeedCard({
       )}
 
       {/* Content */}
-      <div className="flex-1 p-5 flex items-center justify-between min-w-0">
+      <div className="flex-1 p-4 sm:p-5 flex items-center justify-between min-w-0">
         <div className="min-w-0">
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2">
             <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${getCategoryColor(item.category)}`}>
               {item.category}
             </span>
-            <span className="text-[#6B6560] text-sm">{formatDate(item.date)}</span>
+            <span className="text-[#6B6560] text-sm hidden sm:inline">{formatDate(item.date)}</span>
           </div>
-          <h3 className="font-display text-lg text-[#2D2A26] group-hover:text-[#D95D39] transition-colors mb-1 truncate">
+          <h3 className="font-display text-base sm:text-lg text-[#2D2A26] group-hover:text-[#D95D39] transition-colors mb-1 truncate">
             {item.title}
           </h3>
           {item.description && (
-            <p className="body-text text-sm line-clamp-1">{item.description}</p>
+            <p className="body-text text-sm line-clamp-1 hidden sm:block">{item.description}</p>
           )}
         </div>
         <ArrowUpRight
           size={18}
-          className="text-[#6B6560] group-hover:text-[#D95D39] transition-colors flex-shrink-0 ml-4 opacity-0 group-hover:opacity-100"
+          className="text-[#6B6560] group-hover:text-[#D95D39] transition-colors flex-shrink-0 ml-2 sm:ml-4 opacity-0 group-hover:opacity-100"
         />
       </div>
     </Link>
   );
 }
+
+// Desktop card configs (for the polaroid collage in the hero section)
+const CARD_CONFIGS = [
+   { right: '8vw',  top: '12vh', width: '260px', height: '190px', rotation: -3 },
+   { right: '4vw',  top: '35vh', width: '240px', height: '170px', rotation: 4   },
+   { right: '12vw', top: '55vh', width: '220px', height: '150px', rotation: -2 },
+   { right: '6vw',  top: '68vh', width: '190px', height: '130px', rotation: 5   },
+];
+
+// Mobile card configs (compact polaroid collage in a ~45vh container)
+const MOBILE_CARD_CONFIGS = [
+   { right: '5vw', top: '8vh', width: '140px', height: '110px', rotation: -4 },
+   { right: '2vw', top: '35vh', width: '130px', height: '95px', rotation: 6   },
+   { right: '14vw', top: '58vh', width: '120px', height: '85px', rotation: -3 },
+   { right: '7vw', top: '75vh', width: '110px', height: '75px', rotation: 7   },
+];

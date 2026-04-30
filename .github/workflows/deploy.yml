@@ -1,9 +1,14 @@
-name: Deploy to EC2
+name: Build and Deploy Static Site
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+concurrency:
+  group: madebyphil-home-deploy
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -11,18 +16,89 @@ jobs:
     timeout-minutes: 20
 
     steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          test -d dist
+          test -f dist/index.html
+          ls -la dist
+
+      - name: Package build
+        run: |
+          tar -C dist -czf site.tar.gz .
+
       - name: Write SSH key
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "${{ secrets.SSH_KEY }}" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
 
+      - name: Check SSH reachability
+        run: |
+          nc -vz "${{ secrets.SSH_HOST }}" 22
+
       - name: Add server to known_hosts
         run: |
-          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -T 10 -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: Run deploy script
+      - name: Upload build artifact
         run: |
-          ssh -i ~/.ssh/id_deploy \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-            'bash -x /home/ubuntu/madebyphil-home/scripts/deploy.sh'
+          scp -i ~/.ssh/id_deploy \
+            site.tar.gz \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/tmp/site.tar.gz"
+
+      - name: Activate release
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          ssh -T -i ~/.ssh/id_deploy \
+            -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=3 \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
+            "GITHUB_SHA='${GITHUB_SHA}' bash -s" <<'EOF'
+            set -Eeuo pipefail
+
+            APP_DIR="/var/www/madebyphil-home"
+            RELEASES_DIR="/var/www/madebyphil-home/releases"
+            CURRENT_LINK="/var/www/madebyphil-home/current"
+            ARCHIVE_PATH="/tmp/site.tar.gz"
+            RELEASE_ID="${GITHUB_SHA}"
+            NEW_RELEASE_DIR="${RELEASES_DIR}/${RELEASE_ID}"
+
+            mkdir -p "${RELEASES_DIR}"
+            rm -rf "${NEW_RELEASE_DIR}"
+            mkdir -p "${NEW_RELEASE_DIR}"
+
+            tar -xzf "${ARCHIVE_PATH}" -C "${NEW_RELEASE_DIR}"
+            if [ -d "${CURRENT_LINK}" ] && [ ! -L "${CURRENT_LINK}" ]; then
+              rm -rf "${CURRENT_LINK}"
+            fi
+            ln -sfn "${NEW_RELEASE_DIR}" "${CURRENT_LINK}"
+
+            find "${APP_DIR}" -type d -exec chmod 755 {} \;
+            find "${APP_DIR}" -type f -exec chmod 644 {} \;
+
+            sudo nginx -t
+            sudo systemctl reload nginx
+
+            rm -f "${ARCHIVE_PATH}"
+
+            ls -1dt "${RELEASES_DIR}"/* 2>/dev/null | tail -n +6 | xargs -r rm -rf
+
+            curl -I http://localhost
+          EOF

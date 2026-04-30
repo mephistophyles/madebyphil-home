@@ -22,7 +22,7 @@ export default function ClioExperimentsPage() {
 
   return (
     <div className="clio-page min-h-screen">
-      <section className="px-[6vw] pt-32 pb-10 bg-[#0B1120] border-b border-white/10">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-[6vw] pt-32 pb-10 bg-[#0B1120] border-b border-white/10">
         <div className="max-w-6xl mx-auto max-w-6xl">
           <p className="clio-section-label">Clio / Experiments</p>
           <h1 className="font-display headline-lg text-white mb-4">Experiments</h1>
@@ -35,7 +35,7 @@ export default function ClioExperimentsPage() {
 
       <ClioSubnav />
 
-      <section className="px-[6vw] py-16 bg-[#111827] border-b border-white/10">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-[6vw] py-16 bg-[#111827] border-b border-white/10">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.15fr_0.85fr] gap-6 items-start">
           <div className="clio-panel">
             <div className="flex items-center gap-3 mb-4">

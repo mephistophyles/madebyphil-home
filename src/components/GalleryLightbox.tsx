@@ -50,7 +50,7 @@ export default function GalleryLightbox({ item, onClose }: GalleryLightboxProps)
         onClick={(e) => e.stopPropagation()}
       >
         {/* Image area */}
-        <div className="relative md:w-3/5 bg-[#2D2A26] flex items-center justify-center min-h-[300px] md:min-h-[500px]">
+        <div className="relative md:w-3/5 bg-[#2D2A26] flex items-center justify-center min-h-[200px] sm:min-h-[300px] md:min-h-[500px]">
           <img
             src={item.images[currentImage]}
             alt={`${item.title} — image ${currentImage + 1}`}
@@ -90,7 +90,7 @@ export default function GalleryLightbox({ item, onClose }: GalleryLightboxProps)
         </div>
 
         {/* Details panel */}
-        <div className="md:w-2/5 p-6 md:p-8 overflow-y-auto">
+        <div className="md:w-2/5 p-4 sm:p-6 md:p-8 overflow-y-auto">
           {/* Close button */}
           <button
             onClick={onClose}
