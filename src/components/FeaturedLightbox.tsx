@@ -52,7 +52,7 @@ export default function FeaturedLightbox({ item, onClose }: FeaturedLightboxProp
 
         {/* Image */}
         {item.image && (
-          <div className="h-64 md:h-80 overflow-hidden bg-[#2D2A26]">
+          <div className="h-48 sm:h-56 md:h-64 lg:h-80 overflow-hidden bg-[#2D2A26]">
             <img
               src={item.image}
               alt={item.title}

@@ -41,7 +41,7 @@ export default function ClioPage() {
 
   return (
     <div className="clio-page min-h-screen">
-      <section className="px-[6vw] pt-32 pb-10 bg-[#0B1120] border-b border-white/10">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-[6vw] pt-32 pb-10 bg-[#0B1120] border-b border-white/10">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-end">
           <div>
             <div className="clio-kicker mb-5">
@@ -85,7 +85,7 @@ export default function ClioPage() {
 
       <ClioSubnav />
 
-      <section className="px-[6vw] py-16 bg-[#111827] border-b border-white/10">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-[6vw] py-16 bg-[#111827] border-b border-white/10">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
           <div>
             <p className="clio-section-label">What lives here</p>
@@ -143,7 +143,7 @@ export default function ClioPage() {
         </div>
       </section>
 
-      <section className="px-[6vw] py-16 bg-[#0F172A] border-b border-white/10">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-[6vw] py-16 bg-[#0F172A] border-b border-white/10">
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-4">
           <div className="clio-panel">
             <p className="clio-section-label">Rule one</p>
@@ -169,7 +169,7 @@ export default function ClioPage() {
         </div>
       </section>
 
-      <section className="px-[6vw] py-16 bg-[#111827]">
+      <section className="px-4 sm:px-6 md:px-8 lg:px-[6vw] py-16 bg-[#111827]">
         <div className="max-w-5xl mx-auto clio-panel">
           <p className="clio-section-label">Near term</p>
           <h2 className="font-display text-3xl text-white mb-4">Markdown-backed now, richer knowledge graph later.</h2>
