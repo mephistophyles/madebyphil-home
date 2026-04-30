@@ -5,6 +5,13 @@ labels: []
 assignees: []
 ---
 
+## Work type
+
+Choose one:
+- bugfix
+- task
+- epic
+
 ## Goal
 
 What do you want done?
@@ -12,10 +19,6 @@ What do you want done?
 ## Why this matters
 
 Why is this worth doing now?
-
-## Repo / project
-
-Which repo or project does this belong to?
 
 ## Desired outcome
 
