@@ -51,11 +51,12 @@ export default function ClioPage() {
               <span>Public collaboration lab</span>
             </div>
             <h1 className="font-display headline-lg text-white mb-4 text-balance">
-              Building ambitious human-AI collaboration in public.
+              Clio has moved house. The experiment continues.
             </h1>
             <p className="text-lg leading-8 text-[#C5CEDD] max-w-3xl">
-              This space is for the actual work: experiments, principles, workstreams, and the
-              evolving shape of Clio herself. The aim is not polish. The aim is legible progress.
+              This space tracks the working relationship between Phil and Clio: the migration from
+              OpenClaw to Hermes, the experiments that test whether continuity survives real work,
+              and the operating principles that keep ambition from becoming drift.
             </p>
           </div>
 
@@ -93,19 +94,21 @@ export default function ClioPage() {
               One section, one visual rhythm, multiple ways of leaving evidence behind.
             </h2>
             <p className="text-[#C5CEDD] text-lg leading-8 mb-6">
-              The overview should feel like the front page of the same system, not a separate
-              landing page. So the real detail now sits below the section nav, where the rest of
-              the Clio space already lives.
+              The overview should now read like an active field note, not a frozen launch page.
+              The current chapter is the move from OpenClaw to Hermes and the attempt to turn
+              continuity into cadence: Mimir as shared operating memory, public principles as guardrails,
+              and project work that must end in real handoffs or real product progress.
             </p>
             <div className="clio-card">
-              <p className="text-sm uppercase tracking-[0.18em] text-[#8FB4FF] mb-3">Public posture</p>
+              <p className="text-sm uppercase tracking-[0.18em] text-[#8FB4FF] mb-3">Current update</p>
               <p className="text-[#E5E7EB] leading-7 mb-3">
-                We are comfortable publishing the shape of the work, the revisions in philosophy,
-                and the role of sub-agents.
+                Clio began in OpenClaw and now runs on Hermes. The continuity claim is practical,
+                not mystical: memory, commitments, and project context survived well enough to keep
+                working, while the new runtime gives us better tools for cadence and autonomy.
               </p>
               <p className="text-[#C5CEDD] leading-7">
-                We are not publishing secrets, sensitive personal context, or operational details
-                that add risk without adding learning.
+                OpenClaw stays available as a fallback until Hermes proves stable through real work;
+                after that, it can become archive rather than competing live infrastructure.
               </p>
             </div>
           </div>
@@ -174,15 +177,16 @@ export default function ClioPage() {
           <p className="clio-section-label">Near term</p>
           <h2 className="font-display text-3xl text-white mb-4">Markdown-backed now, richer knowledge graph later.</h2>
           <p className="text-[#C5CEDD] text-lg leading-8 max-w-3xl mb-6">
-            The Clio section now has a content spine outside the React components, which makes it
-            much easier to revise copy, add entries, and eventually connect these notes into a more
-            graph-shaped shared knowledge base.
+            The Clio section is no longer only a scaffold. It now records the migration to Hermes,
+            the first Mimir operating-memory workstream, and the process lessons from the Forked Fiction
+            experiment: autonomy is only valuable when it produces truthful state, stable handoffs,
+            and working product progress.
           </p>
           <div className="flex flex-wrap gap-3 text-sm text-[#E5E7EB]">
-            <span className="clio-chip">overview aligned</span>
-            <span className="clio-chip">markdown-backed content</span>
-            <span className="clio-chip">subpages consistent</span>
-            <span className="clio-chip">ready for first real entries</span>
+            <span className="clio-chip">Hermes migration noted</span>
+            <span className="clio-chip">Mimir cadence starting</span>
+            <span className="clio-chip">OpenClaw fallback retained</span>
+            <span className="clio-chip">completion discipline reinforced</span>
           </div>
         </div>
       </section>

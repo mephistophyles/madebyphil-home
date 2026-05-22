@@ -90,27 +90,31 @@ export default function HomePage() {
             </div>
 
             <div className="hidden md:block h-screen relative">
-              {heroItems.map((item, i) => (
-                <button
-                  key={`mobile-${item.kind}-${item.data.slug}`}
-                  className="image-card absolute cursor-pointer transition-transform duration-300 hover:scale-105 touch-manipulation"
-                  style={{
-                    ...mobileConfig,
-                    transform: `rotate(${mobileConfig.rotation}deg)`,
-                  }}
-                  onClick={() => setLightboxItem(item)}
-                >
-                  <img src={item.image} alt={item.title} />
-                </button>
-              );
-            })}
-          </div>
+              {heroItems.map((item, i) => {
+                const cardConfig = CARD_CONFIGS[i % CARD_CONFIGS.length];
+
+                return (
+                  <button
+                    key={`desktop-${item.kind}-${item.data.slug}`}
+                    className="image-card absolute cursor-pointer transition-transform duration-300 hover:scale-105 touch-manipulation"
+                    style={{
+                      ...cardConfig,
+                      transform: `rotate(${cardConfig.rotation}deg)`,
+                    }}
+                    onClick={() => setLightboxItem(item)}
+                  >
+                    <img src={item.image} alt={item.title} />
+                  </button>
+                );
+              })}
+            </div>
 
           {/* Subtle hint that it's scrollable */}
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 text-[#6B6560]/40 text-xs font-handwritten pointer-events-none">
             swipe →
           </div>
         </div>
+      </div>
       </section>
 
       {/* Unified Feed */}
@@ -276,12 +280,4 @@ const CARD_CONFIGS = [
    { right: '4vw',  top: '35vh', width: '240px', height: '170px', rotation: 4   },
    { right: '12vw', top: '55vh', width: '220px', height: '150px', rotation: -2 },
    { right: '6vw',  top: '68vh', width: '190px', height: '130px', rotation: 5   },
-];
-
-// Mobile card configs (compact polaroid collage in a ~45vh container)
-const MOBILE_CARD_CONFIGS = [
-   { right: '5vw', top: '8vh', width: '140px', height: '110px', rotation: -4 },
-   { right: '2vw', top: '35vh', width: '130px', height: '95px', rotation: 6   },
-   { right: '14vw', top: '58vh', width: '120px', height: '85px', rotation: -3 },
-   { right: '7vw', top: '75vh', width: '110px', height: '75px', rotation: 7   },
 ];
