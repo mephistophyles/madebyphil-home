@@ -9,14 +9,14 @@ export default function ProjectPage() {
 
   if (!project) {
     return (
-         <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 bg-[#F7F5F2] min-h-screen">
+         <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 bg-[#E9EEF2] min-h-screen">
            <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-4xl mx-auto">
              <h1 className="font-display headline-lg text-[#2D2A26] mb-4 text-balance">
             Project not found
              </h1>
              <Link
               to="/projects"
-              className="text-[#D95D39] flex items-center gap-2 hover:gap-3 transition-all"
+              className="text-[#5747D5] flex items-center gap-2 hover:gap-3 transition-all"
              >
                 <ArrowLeft size={18} />
               Back to projects
@@ -35,18 +35,18 @@ export default function ProjectPage() {
   return (
      <>
         {/* Header */}
-         <section className="pt-24 sm:pt-32 pb-6 sm:pb-8 bg-[#F7F5F2]">
+         <section className="pt-24 sm:pt-32 pb-6 sm:pb-8 bg-[#E9EEF2]">
            <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-4xl mx-auto">
              <Link
               to="/projects"
-              className="text-[#6B6560] flex items-center gap-2 hover:text-[#D95D39] transition-colors mb-6 sm:mb-8 text-sm"
+              className="text-[#6B6560] flex items-center gap-2 hover:text-[#5747D5] transition-colors mb-6 sm:mb-8 text-sm"
              >
                 <ArrowLeft size={16} />
               Back to projects
              </Link>
 
              <div className="flex items-center gap-3 mb-4 flex-wrap">
-                 <span className="text-[#D95D39] text-sm font-medium px-3 py-1 bg-[#D95D39]/10 rounded-full">
+                 <span className="text-[#5747D5] text-sm font-medium px-3 py-1 bg-[#5747D5]/10 rounded-full">
                    {project.type}
                  </span>
                  {project.status === 'in-progress' && (
@@ -74,7 +74,7 @@ export default function ProjectPage() {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-[#D95D39] hover:underline"
+                    className="flex items-center gap-2 text-[#5747D5] hover:underline"
                    >
                     View project
                      <ArrowUpRight size={16} />
@@ -85,7 +85,7 @@ export default function ProjectPage() {
          </section>
 
         {/* Featured Image */}
-         <section className="bg-[#F7F5F2] pb-3 sm:pb-4">
+         <section className="bg-[#E9EEF2] pb-3 sm:pb-4">
            <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-4xl mx-auto">
              <div className="rounded-xl overflow-hidden card-shadow">
                  <img
@@ -98,9 +98,9 @@ export default function ProjectPage() {
          </section>
 
         {/* Content */}
-         <section className="section-flowing-compact bg-[#F7F5F2]">
+         <section className="section-flowing-compact bg-[#E9EEF2]">
            <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-4xl mx-auto">
-             <article className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-[#2D2A26] prose-p:text-[#6B6560] prose-a:text-[#D95D39] prose-img:rounded-xl">
+             <article className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-[#2D2A26] prose-p:text-[#6B6560] prose-a:text-[#5747D5] prose-img:rounded-xl">
                  <ReactMarkdown
                   components={{
                     h2: ({ children }) => (
@@ -137,7 +137,7 @@ export default function ProjectPage() {
                       const isBlock = className?.includes('language-');
                       if (isBlock) {
                         return (
-                           <code className="block bg-[#2D2A26] text-[#F7F5F2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
+                           <code className="block bg-[#2D2A26] text-[#E9EEF2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
                              {children}
                            </code>
                          );
@@ -149,12 +149,12 @@ export default function ProjectPage() {
                        );
                     },
                     pre: ({ children }) => (
-                       <pre className="bg-[#2D2A26] text-[#F7F5F2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
+                       <pre className="bg-[#2D2A26] text-[#E9EEF2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
                          {children}
                        </pre>
                      ),
                     blockquote: ({ children }) => (
-                       <blockquote className="border-l-4 border-[#D95D39] pl-4 my-4 italic text-[#6B6560] text-sm sm:text-base">
+                       <blockquote className="border-l-4 border-[#5747D5] pl-4 my-4 italic text-[#6B6560] text-sm sm:text-base">
                          {children}
                        </blockquote>
                      ),

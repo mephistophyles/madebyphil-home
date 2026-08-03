@@ -39,7 +39,7 @@ export default function FeaturedLightbox({ item, onClose }: FeaturedLightboxProp
 
       {/* Content */}
       <div
-        className="relative z-10 w-full max-w-2xl mx-4 bg-[#F7F5F2] rounded-2xl overflow-hidden card-shadow"
+        className="relative z-10 w-full max-w-2xl mx-4 bg-[#E9EEF2] rounded-2xl overflow-hidden card-shadow"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
@@ -64,7 +64,7 @@ export default function FeaturedLightbox({ item, onClose }: FeaturedLightboxProp
         {/* Details */}
         <div className="p-6 md:p-8">
           <div className="flex items-center gap-3 mb-3">
-            <span className="text-[#D95D39] text-xs font-medium px-2.5 py-1 bg-[#D95D39]/10 rounded-full">
+            <span className="text-[#5747D5] text-xs font-medium px-2.5 py-1 bg-[#5747D5]/10 rounded-full">
               {item.category}
             </span>
             <span className="text-[#6B6560] text-sm">{formatDate(item.date)}</span>
