@@ -11,14 +11,14 @@ export default function GalleryItemPage() {
 
   if (!item) {
     return (
-          <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 bg-[#F7F5F2] min-h-screen">
+          <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 bg-[#E9EEF2] min-h-screen">
              <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-4xl mx-auto">
                 <h1 className="font-display headline-lg text-[#2D2A26] mb-4 text-balance">
                   Item not found
                 </h1>
                 <Link
                   to="/gallery"
-                  className="text-[#D95D39] flex items-center gap-2 hover:gap-3 transition-all"
+                  className="text-[#5747D5] flex items-center gap-2 hover:gap-3 transition-all"
                 >
                   <ArrowLeft size={18} />
                   Back to gallery
@@ -40,11 +40,11 @@ export default function GalleryItemPage() {
   return (
        <>
           {/* Header */}
-           <section className="pt-24 sm:pt-32 pb-6 sm:pb-8 bg-[#F7F5F2]">
+           <section className="pt-24 sm:pt-32 pb-6 sm:pb-8 bg-[#E9EEF2]">
              <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-4xl mx-auto">
                <Link
                   to="/gallery"
-                  className="text-[#6B6560] flex items-center gap-2 hover:text-[#D95D39] transition-colors mb-6 sm:mb-8 text-sm"
+                  className="text-[#6B6560] flex items-center gap-2 hover:text-[#5747D5] transition-colors mb-6 sm:mb-8 text-sm"
                 >
                    <ArrowLeft size={16} />
                   Back to gallery
@@ -53,7 +53,7 @@ export default function GalleryItemPage() {
                <div className="flex items-center gap-3 mb-4">
                    <span className={`text-sm font-medium px-3 py-1 rounded-full ${
                       item.origin === 'original'
-                         ? 'bg-[#D95D39]/10 text-[#D95D39]'
+                         ? 'bg-[#5747D5]/10 text-[#5747D5]'
                          : 'bg-[#6B6560]/10 text-[#6B6560]'
                   }`}>
                      {originLabel}
@@ -84,7 +84,7 @@ export default function GalleryItemPage() {
                    {item.project_slug && (
                       <Link
                         to={`/projects/${item.project_slug}`}
-                        className="flex items-center gap-2 text-[#D95D39] hover:underline"
+                        className="flex items-center gap-2 text-[#5747D5] hover:underline"
                       >
                         View full project
                          <ArrowUpRight size={16} />
@@ -95,7 +95,7 @@ export default function GalleryItemPage() {
            </section>
 
           {/* Image carousel */}
-           <section className="bg-[#F7F5F2] pb-3 sm:pb-4">
+           <section className="bg-[#E9EEF2] pb-3 sm:pb-4">
              <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-4xl mx-auto">
                <div className="relative rounded-xl overflow-hidden card-shadow bg-[#2D2A26]">
                    <img
@@ -144,7 +144,7 @@ export default function GalleryItemPage() {
                               onClick={() => setCurrentImage(i)}
                              className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden transition-all ${
                                i === currentImage
-                                  ? 'ring-2 ring-[#D95D39] ring-offset-2 ring-offset-[#F7F5F2]'
+                                  ? 'ring-2 ring-[#5747D5] ring-offset-2 ring-offset-[#E9EEF2]'
                                   : 'opacity-60 hover:opacity-100'
                               }`}
                             >
@@ -158,7 +158,7 @@ export default function GalleryItemPage() {
 
           {/* Attribution */}
           {item.attribution && (
-              <section className="bg-[#F7F5F2] pb-3 sm:pb-4">
+              <section className="bg-[#E9EEF2] pb-3 sm:pb-4">
                 <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-4xl mx-auto">
                   <div className="bg-white rounded-xl p-4 sm:p-5 card-shadow">
                       <p className="text-xs text-[#6B6560] mb-1 uppercase tracking-wide font-medium">Attribution</p>
@@ -171,7 +171,7 @@ export default function GalleryItemPage() {
                                 href={item.attribution.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                               className="text-[#D95D39] flex items-center gap-1 text-sm hover:underline"
+                               className="text-[#5747D5] flex items-center gap-1 text-sm hover:underline"
                             >
                               View original <ExternalLink size={14} />
                              </a>
@@ -186,9 +186,9 @@ export default function GalleryItemPage() {
           )}
 
           {/* Content */}
-           <section className="section-flowing-compact bg-[#F7F5F2]">
+           <section className="section-flowing-compact bg-[#E9EEF2]">
              <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-4xl mx-auto">
-                <article className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-[#2D2A26] prose-p:text-[#6B6560] prose-a:text-[#D95D39] prose-img:rounded-xl">
+                <article className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-[#2D2A26] prose-p:text-[#6B6560] prose-a:text-[#5747D5] prose-img:rounded-xl">
                    <ReactMarkdown
                       components={{
                          h2: ({ children }) => (
@@ -223,7 +223,7 @@ export default function GalleryItemPage() {
                            const isBlock = className?.includes('language-');
                            if (isBlock) {
                               return (
-                                 <code className="block bg-[#2D2A26] text-[#F7F5F2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
+                                 <code className="block bg-[#2D2A26] text-[#E9EEF2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
                                    {children}
                                  </code>
                               );
@@ -235,12 +235,12 @@ export default function GalleryItemPage() {
                            );
                          },
                          pre: ({ children }) => (
-                            <pre className="bg-[#2D2A26] text-[#F7F5F2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
+                            <pre className="bg-[#2D2A26] text-[#E9EEF2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
                               {children}
                             </pre>
                          ),
                          blockquote: ({ children }) => (
-                            <blockquote className="border-l-4 border-[#D95D39] pl-4 my-4 italic text-[#6B6560] text-sm sm:text-base">
+                            <blockquote className="border-l-4 border-[#5747D5] pl-4 my-4 italic text-[#6B6560] text-sm sm:text-base">
                                {children}
                             </blockquote>
                          ),

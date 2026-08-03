@@ -46,7 +46,7 @@ export default function GalleryLightbox({ item, onClose }: GalleryLightboxProps)
 
       {/* Content */}
       <div
-        className="relative z-10 w-full max-w-4xl mx-4 max-h-[90vh] flex flex-col md:flex-row bg-[#F7F5F2] rounded-2xl overflow-hidden card-shadow"
+        className="relative z-10 w-full max-w-4xl mx-4 max-h-[90vh] flex flex-col md:flex-row bg-[#E9EEF2] rounded-2xl overflow-hidden card-shadow"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Image area */}
@@ -102,7 +102,7 @@ export default function GalleryLightbox({ item, onClose }: GalleryLightboxProps)
           {/* Origin badge */}
           <span className={`inline-block text-xs font-medium px-2.5 py-1 rounded-full mb-4 ${
             item.origin === 'original'
-              ? 'bg-[#D95D39]/10 text-[#D95D39]'
+              ? 'bg-[#5747D5]/10 text-[#5747D5]'
               : 'bg-[#6B6560]/10 text-[#6B6560]'
           }`}>
             {originLabel}
@@ -133,7 +133,7 @@ export default function GalleryLightbox({ item, onClose }: GalleryLightboxProps)
                     href={item.attribution.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#D95D39] hover:underline"
+                    className="text-[#5747D5] hover:underline"
                   >
                     <ExternalLink size={14} />
                   </a>
@@ -171,7 +171,7 @@ export default function GalleryLightbox({ item, onClose }: GalleryLightboxProps)
             {item.tier === 'feature' && (
               <Link
                 to={`/gallery/${item.slug}`}
-                className="text-[#D95D39] text-sm flex items-center gap-1.5 hover:gap-2.5 transition-all"
+                className="text-[#5747D5] text-sm flex items-center gap-1.5 hover:gap-2.5 transition-all"
                 onClick={onClose}
               >
                 Read full writeup <ArrowUpRight size={14} />
@@ -180,7 +180,7 @@ export default function GalleryLightbox({ item, onClose }: GalleryLightboxProps)
             {item.project_slug && (
               <Link
                 to={`/projects/${item.project_slug}`}
-                className="text-[#D95D39] text-sm flex items-center gap-1.5 hover:gap-2.5 transition-all"
+                className="text-[#5747D5] text-sm flex items-center gap-1.5 hover:gap-2.5 transition-all"
                 onClick={onClose}
               >
                 See full project <ArrowUpRight size={14} />

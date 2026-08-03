@@ -37,7 +37,7 @@ export default function GalleryPage() {
   return (
     <>
        {/* Page Header */}
-       <section className="pt-24 sm:pt-32 pb-6 sm:pb-8 bg-[#F7F5F2]">
+       <section className="pt-24 sm:pt-32 pb-6 sm:pb-8 bg-[#E9EEF2]">
          <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-6xl mx-auto">
            <h1 className="font-display headline-xl text-[#2D2A26] mb-4 text-balance">
             Gallery
@@ -49,14 +49,14 @@ export default function GalleryPage() {
        </section>
 
        {/* Filter Tabs */}
-       <section className="bg-[#F7F5F2] pb-4">
+       <section className="bg-[#E9EEF2] pb-4">
          <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-6xl mx-auto">
            <div className="flex items-center gap-2 flex-wrap -mx-2 px-2">
              <button
               onClick={() => setActiveFilter('All')}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 activeFilter === 'All'
-                    ? 'bg-[#D95D39] text-white'
+                    ? 'bg-[#5747D5] text-white'
                     : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
                }`}
              >
@@ -68,7 +68,7 @@ export default function GalleryPage() {
                 onClick={() => setActiveFilter(origin)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   activeFilter === origin
-                      ? 'bg-[#D95D39] text-white'
+                      ? 'bg-[#5747D5] text-white'
                       : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
                   }`}
                >
@@ -80,7 +80,7 @@ export default function GalleryPage() {
        </section>
 
        {/* Masonry Grid */}
-       <section className="section-flowing-compact bg-[#F7F5F2]">
+       <section className="section-flowing-compact bg-[#E9EEF2]">
          <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-6xl mx-auto">
            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 sm:gap-5 space-y-4 sm:space-y-5">
              {filteredItems.map((item) => (
@@ -122,7 +122,7 @@ export default function GalleryPage() {
                      <div className="flex items-center justify-between">
                        <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                         item.origin === 'original'
-                            ? 'bg-[#D95D39]/10 text-[#D95D39]'
+                            ? 'bg-[#5747D5]/10 text-[#5747D5]'
                             : 'bg-[#6B6560]/10 text-[#6B6560]'
                        }`}>
                          {ORIGIN_LABELS[item.origin]}
@@ -136,7 +136,7 @@ export default function GalleryPage() {
                      </div>
 
                      {/* Show title below when not hovered (visible by default, hidden on hover as it appears on image) */}
-                     <h3 className="font-display text-sm sm:text-base text-[#2D2A26] mt-1.5 sm:mt-2 group-hover:text-[#D95D39] transition-colors">
+                     <h3 className="font-display text-sm sm:text-base text-[#2D2A26] mt-1.5 sm:mt-2 group-hover:text-[#5747D5] transition-colors">
                        {item.title}
                      </h3>
 

@@ -9,14 +9,14 @@ export default function ArticlePage() {
 
   if (!article) {
     return (
-         <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 bg-[#F7F5F2] min-h-screen">
+         <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 bg-[#E9EEF2] min-h-screen">
            <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-5xl mx-auto">
              <h1 className="font-display headline-lg text-[#2D2A26] mb-4">
             Article not found
              </h1>
              <Link
               to="/writing"
-              className="text-[#D95D39] flex items-center gap-2 hover:gap-3 transition-all"
+              className="text-[#5747D5] flex items-center gap-2 hover:gap-3 transition-all"
               >
                 <ArrowLeft size={18} />
               Back to writing
@@ -35,18 +35,18 @@ export default function ArticlePage() {
   return (
       <>
          {/* Header */}
-          <section className="pt-24 sm:pt-32 pb-3 sm:pb-4 bg-[#F7F5F2]">
+          <section className="pt-24 sm:pt-32 pb-3 sm:pb-4 bg-[#E9EEF2]">
             <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-5xl mx-auto">
               <Link
               to="/writing"
-              className="text-[#6B6560] flex items-center gap-2 hover:text-[#D95D39] transition-colors mb-6 sm:mb-8 text-sm"
+              className="text-[#6B6560] flex items-center gap-2 hover:text-[#5747D5] transition-colors mb-6 sm:mb-8 text-sm"
               >
                  <ArrowLeft size={16} />
                 Back to writing
               </Link>
 
               <div className="flex items-center gap-3 mb-4 flex-wrap">
-                  <span className="text-[#D95D39] text-sm font-medium px-3 py-1 bg-[#D95D39]/10 rounded-full">
+                  <span className="text-[#5747D5] text-sm font-medium px-3 py-1 bg-[#5747D5]/10 rounded-full">
                     {article.category}
                   </span>
                   <span className="flex items-center gap-2 text-[#6B6560] text-sm">
@@ -63,9 +63,9 @@ export default function ArticlePage() {
           </section>
 
          {/* Content */}
-          <section className="section-flowing-compact bg-[#F7F5F2]">
+          <section className="section-flowing-compact bg-[#E9EEF2]">
             <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-5xl mx-auto">
-              <article className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-[#2D2A26] prose-p:text-[#6B6560] prose-a:text-[#D95D39] prose-img:rounded-xl">
+              <article className="prose prose-lg max-w-none prose-headings:font-display prose-headings:text-[#2D2A26] prose-p:text-[#6B6560] prose-a:text-[#5747D5] prose-img:rounded-xl">
                   <ReactMarkdown
                   components={{
                     h2: ({ children }) => (
@@ -102,7 +102,7 @@ export default function ArticlePage() {
                       const isBlock = className?.includes('language-');
                       if (isBlock) {
                         return (
-                            <code className="block bg-[#2D2A26] text-[#F7F5F2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
+                            <code className="block bg-[#2D2A26] text-[#E9EEF2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
                               {children}
                             </code>
                           );
@@ -114,12 +114,12 @@ export default function ArticlePage() {
                         );
                      },
                     pre: ({ children }) => (
-                        <pre className="bg-[#2D2A26] text-[#F7F5F2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
+                        <pre className="bg-[#2D2A26] text-[#E9EEF2] p-3 sm:p-4 rounded-lg text-xs sm:text-sm overflow-x-auto my-4">
                           {children}
                         </pre>
                       ),
                     blockquote: ({ children }) => (
-                        <blockquote className="border-l-4 border-[#D95D39] pl-4 my-4 italic text-[#6B6560] text-sm sm:text-base">
+                        <blockquote className="border-l-4 border-[#5747D5] pl-4 my-4 italic text-[#6B6560] text-sm sm:text-base">
                           {children}
                         </blockquote>
                       ),

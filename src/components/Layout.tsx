@@ -11,7 +11,7 @@ export default function Layout() {
   }, [pathname]);
 
   return (
-    <div className="relative bg-[#F7F5F2] min-h-screen">
+    <div className="relative bg-[#E9EEF2] min-h-screen">
       <Navigation />
       <main className="relative">
         <Outlet />

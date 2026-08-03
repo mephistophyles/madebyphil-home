@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="bg-[#2D2A26] py-8">
       <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw]">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="font-display text-xl text-[#F7F5F2] mb-4">
+          <p className="font-display text-xl text-[#E9EEF2] mb-4">
             Thanks for stopping by.
           </p>
 
@@ -20,7 +20,7 @@ export default function Footer() {
               <a
                 key={index}
                 href={link.href}
-                className="flex items-center gap-2 text-[#6B6560] hover:text-[#D95D39] transition-colors"
+                className="flex items-center gap-2 text-[#6B6560] hover:text-[#5747D5] transition-colors"
               >
                 <link.icon size={18} />
                 <span className="text-sm">{link.label}</span>

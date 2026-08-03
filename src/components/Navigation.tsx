@@ -3,9 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { label: 'Clio', to: '/clio' },
   { label: 'Projects', to: '/projects' },
-  { label: 'Gallery', to: '/gallery' },
   { label: 'Writing', to: '/writing' },
   { label: 'About', to: '/about' },
 ];
@@ -21,7 +19,7 @@ export default function Navigation() {
       ? 'bg-[#0B1120]/92 backdrop-blur-lg py-4 border-b border-white/10'
       : 'bg-transparent py-6'
     : isScrolled
-      ? 'bg-[#F7F5F2] py-4'
+      ? 'bg-[#E9EEF2] py-4'
       : 'bg-transparent py-6';
 
   const logoTextClass = isClioRoute && !isScrolled ? 'text-white' : 'text-[#2D2A26]';
@@ -33,7 +31,7 @@ export default function Navigation() {
     }
 
     return isActive
-      ? 'text-[#D95D39] font-medium text-sm'
+      ? 'text-[#5747D5] font-medium text-sm'
       : 'nav-link';
   };
 
@@ -83,7 +81,7 @@ export default function Navigation() {
 
       <div
         className={`fixed inset-0 z-[999] backdrop-blur-lg transition-all duration-300 md:hidden ${
-          isClioRoute ? 'bg-[#0B1120]/98' : 'bg-[#F7F5F2]/98'
+          isClioRoute ? 'bg-[#0B1120]/98' : 'bg-[#E9EEF2]/98'
         } ${
           isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
@@ -100,8 +98,8 @@ export default function Navigation() {
                       ? 'text-[#6EE7B7]'
                       : 'text-white hover:text-[#8FB4FF]'
                     : isActive
-                      ? 'text-[#D95D39]'
-                      : 'text-[#2D2A26] hover:text-[#D95D39]'
+                      ? 'text-[#5747D5]'
+                      : 'text-[#2D2A26] hover:text-[#5747D5]'
                 }`
               }
               onClick={closeMobileMenu}

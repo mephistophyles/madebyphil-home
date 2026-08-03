@@ -32,7 +32,7 @@ export default function WritingPage() {
   return (
     <>
         {/* Page Header */}
-        <section className="pt-24 sm:pt-32 pb-6 sm:pb-8 bg-[#F7F5F2]">
+        <section className="pt-24 sm:pt-32 pb-6 sm:pb-8 bg-[#E9EEF2]">
           <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-5xl mx-auto">
             <h1 className="font-display headline-xl text-[#2D2A26] mb-4 text-balance">
             Writing
@@ -44,14 +44,14 @@ export default function WritingPage() {
         </section>
 
         {/* Filter Tabs */}
-        <section className="bg-[#F7F5F2] pb-4">
+        <section className="bg-[#E9EEF2] pb-4">
           <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-5xl mx-auto">
             <div className="flex items-center gap-2 flex-wrap -mx-2 px-2">
               <button
               onClick={() => setActiveFilter('All')}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 activeFilter === 'All'
-                     ? 'bg-[#D95D39] text-white'
+                     ? 'bg-[#5747D5] text-white'
                      : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
                 }`}
               >
@@ -63,7 +63,7 @@ export default function WritingPage() {
                 onClick={() => setActiveFilter(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   activeFilter === category
-                       ? 'bg-[#D95D39] text-white'
+                       ? 'bg-[#5747D5] text-white'
                        : 'bg-[#2D2A26]/5 text-[#6B6560] hover:bg-[#2D2A26]/10'
                    }`}
                 >
@@ -75,7 +75,7 @@ export default function WritingPage() {
         </section>
 
         {/* Articles List */}
-        <section className="section-flowing-compact bg-[#F7F5F2]">
+        <section className="section-flowing-compact bg-[#E9EEF2]">
           <div className="px-4 sm:px-6 md:px-8 lg:px-[6vw] max-w-5xl mx-auto">
             <div className="space-y-3 sm:space-y-4">
               {filteredArticles.map((article) => (
@@ -87,14 +87,14 @@ export default function WritingPage() {
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-2 mb-1 sm:mb-2 flex-wrap">
-                        <span className="text-[#D95D39] text-xs font-medium px-2 py-0.5 bg-[#D95D39]/10 rounded-full">
+                        <span className="text-[#5747D5] text-xs font-medium px-2 py-0.5 bg-[#5747D5]/10 rounded-full">
                           {article.category}
                         </span>
                         <span className="text-[#6B6560] text-sm">
                           {formatDate(article.date)}
                         </span>
                       </div>
-                      <h3 className="font-display text-base sm:text-lg text-[#2D2A26] group-hover:text-[#D95D39] transition-colors mb-1 line-clamp-2">
+                      <h3 className="font-display text-base sm:text-lg text-[#2D2A26] group-hover:text-[#5747D5] transition-colors mb-1 line-clamp-2">
                         {article.title}
                       </h3>
                       <p className="body-text text-sm sm:hidden">{article.excerpt}</p>
@@ -102,7 +102,7 @@ export default function WritingPage() {
                     </div>
                     <ArrowUpRight
                     size={18}
-                    className="text-[#6B6560] group-hover:text-[#D95D39] transition-colors flex-shrink-0 mt-1"
+                    className="text-[#6B6560] group-hover:text-[#5747D5] transition-colors flex-shrink-0 mt-1"
                     />
                   </div>
                 </Link>
