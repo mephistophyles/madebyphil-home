@@ -4,7 +4,7 @@ excerpt: Let's stop blaming a tool for humans always choosing the easy path
 category: education
 featured: false
 tags: [AI, education]
-date: 2026-09-02
+date: 2026-09-03
 ---
 
 AI can be good for your learning - really!

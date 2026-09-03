@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, Calendar, Tag } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { getProjectBySlug } from '@/lib/projects';
+import { formatFrontmatterDate } from '@/lib/utils';
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -26,7 +27,7 @@ export default function ProjectPage() {
        );
    }
 
-  const formattedDate = new Date(project.date).toLocaleDateString('en-US', {
+  const formattedDate = formatFrontmatterDate(project.date, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

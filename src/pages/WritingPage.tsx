@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { getAllArticles, getArticleCounts, getAvailableArticleCategories } from '@/lib/articles';
+import { formatFrontmatterDate } from '@/lib/utils';
 import type { ArticleCategory } from '@/types/article';
 
 type FilterType = 'All' | ArticleCategory;
@@ -20,7 +21,7 @@ export default function WritingPage() {
   }, [allArticles, activeFilter]);
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en-US', {
+    return formatFrontmatterDate(dateStr, {
       year: 'numeric',
       month: 'short',
       day: 'numeric',

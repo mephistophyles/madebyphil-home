@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowUpRight, Calendar, Tag, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { getGalleryItemBySlug } from '@/lib/gallery';
+import { formatFrontmatterDate } from '@/lib/utils';
 
 export default function GalleryItemPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -28,7 +29,7 @@ export default function GalleryItemPage() {
     );
   }
 
-  const formattedDate = new Date(item.date).toLocaleDateString('en-US', {
+  const formattedDate = formatFrontmatterDate(item.date, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

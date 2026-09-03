@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { getArticleBySlug } from '@/lib/articles';
+import { formatFrontmatterDate } from '@/lib/utils';
 
 export default function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -26,7 +27,7 @@ export default function ArticlePage() {
         );
     }
 
-  const formattedDate = new Date(article.date).toLocaleDateString('en-US', {
+  const formattedDate = formatFrontmatterDate(article.date, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

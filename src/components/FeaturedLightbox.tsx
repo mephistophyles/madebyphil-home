@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { X, ArrowUpRight } from 'lucide-react';
 import type { FeedItem } from '@/lib/feed';
+import { formatFrontmatterDate } from '@/lib/utils';
 
 interface FeaturedLightboxProps {
   item: FeedItem;
@@ -22,7 +23,7 @@ export default function FeaturedLightbox({ item, onClose }: FeaturedLightboxProp
   }, [onClose]);
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en-US', {
+    return formatFrontmatterDate(dateStr, {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
